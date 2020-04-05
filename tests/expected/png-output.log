@@ -1,0 +1,18 @@
+prepare './empty_in/tests-png' folder
+cleanup './empty_in/tests-png' folder content
+prepare './in/tests-png' folder
+cleanup './in/tests-png' folder content
+export page 1 > ./in/file1.drawio -> ./in/tests-png/file1-Page-1.png
+export page 2 > ./in/file1.drawio -> ./in/tests-png/file1-Page 2.png
+prepare './in/folder1/tests-png' folder
+cleanup './in/folder1/tests-png' folder content
+export page 1 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-png/file2.1-Page-1.png
+export page 2 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-png/file2.1-Page 2.png
+prepare './in/folder1/tests-png' folder
+cleanup './in/folder1/tests-png' folder content
+export page 1 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-png/file2.2-Page-1.png
+export page 2 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-png/file2.2-Page 2.png
+prepare './in/folder2/folder3/tests-png' folder
+cleanup './in/folder2/folder3/tests-png' folder content
+export page 1 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-png/file3-Page-1.png
+export page 2 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-png/file3-Page 2.png

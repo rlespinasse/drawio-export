@@ -1,0 +1,18 @@
+prepare './empty_in/export' folder
+cleanup './empty_in/export' folder content
+prepare './in/export' folder
+cleanup './in/export' folder content
+export page 1 > ./in/file1.drawio -> ./in/export/file1-Page-1.pdf
+export page 2 > ./in/file1.drawio -> ./in/export/file1-Page 2.pdf
+prepare './in/folder1/export' folder
+cleanup './in/folder1/export' folder content
+export page 1 > ./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page-1.pdf
+export page 2 > ./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page 2.pdf
+prepare './in/folder1/export' folder
+cleanup './in/folder1/export' folder content
+export page 1 > ./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page-1.pdf
+export page 2 > ./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page 2.pdf
+prepare './in/folder2/folder3/export' folder
+cleanup './in/folder2/folder3/export' folder content
+export page 1 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-1.pdf
+export page 2 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page 2.pdf
