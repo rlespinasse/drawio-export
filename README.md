@@ -1,6 +1,7 @@
 # Draw.io Export
 
 ![dockerhub build](https://img.shields.io/docker/cloud/build/rlespinasse/drawio-export?style=for-the-badge)
+![dockerhub pulls](https://img.shields.io/docker/pulls/rlespinasse/drawio-export?style=for-the-badge)
 
 Export Draw.io diagrams using command line / docker
 
