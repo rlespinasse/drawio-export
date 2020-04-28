@@ -1,9 +1,15 @@
-cleanup:
-	@find tests -name "export" | while read -r output; do rm -rf "$$output"; done
-	@find tests -name "tests-*" | while read -r output; do rm -rf "$$output"; done
+.PHONY: build publish test
 
 build:
 	@docker build -t rlespinasse/drawio-export .
 
+publish:
+	@docker push rlespinasse/drawio-export
+
 test:
 	@./tests.sh
+
+cleanup:
+	@find tests -name "export" | xargs -I {} rm -r "{}"
+	@find tests -name "images" | xargs -I {} rm -r "{}"
+	@find tests -name "tests-*" | xargs -I {} rm -r "{}"
