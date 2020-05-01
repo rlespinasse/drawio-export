@@ -1,3 +1,4 @@
 export/
 tests-*/
 actual/
+node_modules/

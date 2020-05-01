@@ -1,0 +1,18 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rlespinasse/github-slug-action@v2.x
+      - name: Build docker image
+        run: docker build -t ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }} .
+      - uses: cycjimmy/semantic-release-action@v2
+        with:
+          semantic_version: 17.0.7
+          extra_plugins: |
+            @semantic-release/changelog@5.0.1
+            @semantic-release/git@9.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

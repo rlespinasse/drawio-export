@@ -1,0 +1,17 @@
+name: Publish to Registry
+on:
+  release:
+    types: [published]
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rlespinasse/github-slug-action@v2.x
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: ${{ github.repository }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ env.GITHUB_REF_SLUG }}"
