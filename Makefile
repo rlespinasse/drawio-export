@@ -1,13 +1,11 @@
-.PHONY: build publish test
+.PHONY: build test cleanup
 
+DOCKER_IMAGE?=rlespinasse/drawio-export:local
 build:
-	@docker build -t rlespinasse/drawio-export .
-
-publish:
-	@docker push rlespinasse/drawio-export
+	@docker build -t ${DOCKER_IMAGE} .
 
 test:
-	@./tests.sh
+	@TEST_DOCKER_IMAGE=${DOCKER_IMAGE} ./tests.sh
 
 cleanup:
 	@find tests -name "export" | xargs -I {} rm -r "{}"

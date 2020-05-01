@@ -15,18 +15,17 @@ function run_test() {
   echo "+ run '$1' command"
 
   # shellcheck disable=SC2086
-  docker run -it \
+  docker run -t \
     -e DRAWIO_EXPORT_FILEEXT="$2" \
     -e DRAWIO_EXPORT_CLI_OPTIONS="$3" \
     -e DRAWIO_EXPORT_FOLDER="$4" \
-    -v "$(pwd)"/tests/data:/data \
-    --privileged \
-    rlespinasse/drawio-export $5 | tee "tests/actual/$1-output.log"
+    -v "$(pwd)"/tests/data:/data:rw \
+    --privileged "${TEST_DOCKER_IMAGE}" $5 | tee "tests/actual/$1-output.log"
 
   echo "+ run '$1' test"
   # shellcheck disable=SC2038
   find . -type d -name "$4" | xargs -n 1 -I {} find "{}" -type f | tee "tests/actual/$1-files.log"
-  output_test=$(comm --nocheck-order -13 "tests/actual/$1-output.log" "tests/expected/$1-output.log")
+  output_test=$(diff --strip-trailing-cr "tests/actual/$1-output.log" "tests/expected/$1-output.log")
   files_test=$(comm -13 <(sort "tests/actual/$1-files.log") <(sort "tests/expected/$1-files.log"))
 
   echo "+ check '$1' test"
@@ -40,15 +39,14 @@ function run_test() {
     echo "$files_test"
   fi
 
-  echo "+ cleanup '$1' test"
-  cleanup "${4:-export}"
-
   if [ -n "$output_test" ] || [ -n "$files_test" ]; then
     return 1
   fi
   return 0
 }
 
+# In order to works everywhere
+chmod -R 777 tests/data
 mkdir -p tests/actual
 cleanup "export"
 cleanup "tests-*"

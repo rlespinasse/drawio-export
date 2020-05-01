@@ -7,7 +7,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: rlespinasse/github-slug-action@v2.x
       - name: Build docker image
-        run: docker build -t ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }} .
+        run: make build
+        env:
+          DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
+      - name: Test docker image
+        run: make test
+        env:
+          DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
       - uses: cycjimmy/semantic-release-action@v2
         with:
           semantic_version: 17.0.7

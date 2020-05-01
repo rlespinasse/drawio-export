@@ -1,25 +1,20 @@
 prepare './empty_in/tests-adoc' folder
-cleanup './empty_in/tests-adoc/empty-*' content
 prepare './in/tests-adoc' folder
-cleanup './in/tests-adoc/file1-*' content
 export page 1 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.png
 create page 1 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.adoc
 export page 2 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page 2.png
 create page 2 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page 2.adoc
 prepare './in/folder1/tests-adoc' folder
-cleanup './in/folder1/tests-adoc/file2.1-*' content
 export page 1 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.png
 create page 1 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.adoc
 export page 2 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page 2.png
 create page 2 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page 2.adoc
 prepare './in/folder1/tests-adoc' folder
-cleanup './in/folder1/tests-adoc/file2.2-*' content
 export page 1 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.png
 create page 1 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.adoc
 export page 2 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page 2.png
 create page 2 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page 2.adoc
 prepare './in/folder2/folder3/tests-adoc' folder
-cleanup './in/folder2/folder3/tests-adoc/file3-*' content
 export page 1 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.png
 create page 1 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.adoc
 export page 2 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page 2.png

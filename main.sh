@@ -70,9 +70,6 @@ function export_file() {
     echo "prepare '$current_folder/$FOLDER' folder"
     mkdir -p "$current_folder/$FOLDER"
 
-    echo "cleanup '$current_folder/$FOLDER/$current_filename-*' content"
-    find "$current_folder/$FOLDER" -name "$current_filename-*" -delete
-
     export_pages "$current_path" "$current_folder" "$current_filename"
   done < <(find . -name "*.drawio" | sort)
 }
