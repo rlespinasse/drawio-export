@@ -1,3 +1,10 @@
+## [2.0.1](http://github.com/rlespinasse/drawio-export/compare/2.0.0...2.0.1) (2020-05-02)
+
+
+### Bug Fixes
+
+* override the drawio exported asciidoctor file ([2145b57](http://github.com/rlespinasse/drawio-export/commit/2145b57b65d073f875fdf303c32131c74169da8d))
+
 # [2.0.0](http://github.com/rlespinasse/drawio-export/compare/1.1.0...2.0.0) (2020-05-02)
 
 
