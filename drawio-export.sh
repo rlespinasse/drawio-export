@@ -56,7 +56,7 @@ function export_pages() {
           sed 's/.*label="//g;s/" link="/;/g;s/".*//;/^$/d;s/\(.*\);\(.*\)/* \2[\1]/'
 
         echo ""
-      } >>"$adoc_file"
+      } >"$adoc_file"
     fi
   done < <(sgrep '"name=\"".."\""' "$path" | sed 's/^name="//;s/"name="/\n/g;s/"$//')
 }
