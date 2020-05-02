@@ -1,11 +1,8 @@
-FROM rlespinasse/drawio-cli:1.0.0
+FROM rlespinasse/drawio-cli:2.0.0
 
-WORKDIR /drawio
-
-COPY entrypoint-export.sh .
-COPY main.sh .
-COPY default.env .
+COPY entrypoint.sh /drawio/entrypoint.sh
+COPY drawio-export.sh /drawio/drawio-export.sh
+COPY drawio-default.env /drawio/drawio-default.env
 
 WORKDIR /data
-ENTRYPOINT [ "/drawio/entrypoint-export.sh" ]
 CMD [ "" ]

@@ -21,12 +21,13 @@ function export_pages() {
 
   while read -r page; do
     pagenum=$((pagenum + 1))
-    printf "export page %s > " "$pagenum"
+    printf "export page %s - %s\n" "$pagenum" "$path"
 
     output_file="$folder/$FOLDER/$filename-$page.$pagefileext"
 
     # shellcheck disable=SC2086
     "$DRAWIO_CLI" \
+      --no-sandbox \
       -x \
       -f "$pagefileext" \
       $CLI_OPTIONS \
@@ -82,13 +83,13 @@ command -v sgrep >/dev/null 2>&1 || {
 args="${*}"
 if [ -n "$args" ]; then
   # shellcheck disable=SC2086
-  "$DRAWIO_CLI" $args
+  "$DRAWIO_CLI" --no-sandbox $args
   exit 0
 fi
 
 DEFAULT_FOLDER="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # shellcheck disable=SC1090
-source "$DEFAULT_FOLDER/default.env"
+source "$DEFAULT_FOLDER/drawio-default.env"
 
 FILEEXT=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}

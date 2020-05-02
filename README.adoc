@@ -14,11 +14,13 @@ docker pull rlespinasse/drawio-export
 [source,bash]
 ----
 $ cd directory-with-drawio-files
-$ docker run -it --privileged -v $(pwd):/data rlespinasse/drawio-export
+$ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 prepare './export' folder
 cleanup './export/file-*' content
-export page 1 > ./file1.drawio -> ./export/file1-Page-1.pdf
-export page 2 > ./file1.drawio -> ./export/file1-Page-2.pdf
+export page 1 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-1.pdf
+export page 2 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-2.pdf
 ----
 
 You can override default configuration
@@ -32,18 +34,20 @@ For example, export draw.io diagrams as PNG with transparent background
 [source,bash]
 ----
 $ cd directory-with-drawio-files
-$ docker run -it --privileged -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_FILEEXT="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
+$ docker run -it -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_FILEEXT="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
 prepare './images' folder
 cleanup './images/file-*' content
-export page 1 > ./file1.drawio -> ./export/file1-Page-1.png
-export page 2 > ./file1.drawio -> ./export/file1-Page-2.png
+export page 1 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-1.png
+export page 2 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-2.png
 ----
 
 You can print the available options with
 
 [source,bash]
 ----
-docker run -it --privileged rlespinasse/drawio-export --help
+docker run -it rlespinasse/drawio-export --help
 ----
 
 == Contributing
