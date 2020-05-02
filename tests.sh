@@ -2,7 +2,7 @@
 IFS=$'\n\t'
 
 # shellcheck disable=SC1091
-source ./default.env
+source ./drawio-default.env
 
 function cleanup() {
   echo "+ cleanup '$1' folder(s)"
@@ -19,14 +19,14 @@ function run_test() {
     -e DRAWIO_EXPORT_FILEEXT="$2" \
     -e DRAWIO_EXPORT_CLI_OPTIONS="$3" \
     -e DRAWIO_EXPORT_FOLDER="$4" \
-    -v "$(pwd)"/tests/data:/data:rw \
-    --privileged "${TEST_DOCKER_IMAGE}" $5 | tee "tests/actual/$1-output.log"
+    -v "$(pwd)"/tests/data:/data \
+    "${TEST_DOCKER_IMAGE}" $5 | tee "tests/actual/$1-output.log"
 
   echo "+ run '$1' test"
   # shellcheck disable=SC2038
   find . -type d -name "$4" | xargs -n 1 -I {} find "{}" -type f | tee "tests/actual/$1-files.log"
   output_test=$(diff --strip-trailing-cr "tests/actual/$1-output.log" "tests/expected/$1-output.log")
-  files_test=$(comm -13 <(sort "tests/actual/$1-files.log") <(sort "tests/expected/$1-files.log"))
+  files_test=$(diff --strip-trailing-cr <(sort "tests/actual/$1-files.log") <(sort "tests/expected/$1-files.log"))
 
   echo "+ check '$1' test"
   if [ -n "$output_test" ]; then
@@ -45,8 +45,6 @@ function run_test() {
   return 0
 }
 
-# In order to works everywhere
-chmod -R 777 tests/data
 mkdir -p tests/actual
 cleanup "export"
 cleanup "tests-*"

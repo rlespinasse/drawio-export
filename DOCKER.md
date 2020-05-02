@@ -14,11 +14,13 @@ See [Dockerfile][2]
 
 ```bash
 $ cd directory-with-drawio-files
-$ docker run -it --privileged -v $(pwd):/data rlespinasse/drawio-export
+$ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 prepare './export' folder
 cleanup './export/file-*' content
-export page 1 > ./file1.drawio -> ./export/file1-Page-1.pdf
-export page 2 > ./file1.drawio -> ./export/file1-Page-2.pdf
+export page 1 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-1.pdf
+xport page 2 - ./file1.drawio
+./file1.drawio -> ./export/file1-Page-2.pdf
 ```
 
 Want to read more, go to [rlespinasse/drawio-export][1] on GitHub.
