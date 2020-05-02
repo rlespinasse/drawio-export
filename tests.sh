@@ -77,3 +77,5 @@ if [ "$result_default" == "1" ] ||
   fi
   exit 1
 fi
+
+echo "All tests are valid"
