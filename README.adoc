@@ -50,6 +50,41 @@ You can print the available options with
 docker run -it rlespinasse/drawio-export --help
 ----
 
+== Integrations
+
+.GitHub Action : Export and commit your draw.io files
+[%collapsible]
+====
+..github/workflows/drawio-export.yaml
+[source,yaml]
+----
+name: Keep draw.io export synchronized
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**.drawio"
+      - .github/workflows/drawio-export.yaml
+jobs:
+  drawio-export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Export drawio files to asciidoctor and png files
+        uses: docker://rlespinasse/drawio-export
+        env:
+          DRAWIO_EXPORT_FILEEXT: adoc
+          DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS: -t
+          DRAWIO_EXPORT_FOLDER: assets
+      - name: Commit changed files
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: "docs: sync draw.io exported files"
+----
+====
+
 == Contributing
 
 Pull requests are welcome.
