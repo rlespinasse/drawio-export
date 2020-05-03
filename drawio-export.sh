@@ -68,7 +68,7 @@ function export_pages() {
         printf "%b" "$xmldata" |
           sgrep '"<UserObject"..">"' |
           sed 's/<UserObject/\n/g' |
-          sed 's/.*label="//g;s/" link="/;/g;s/".*//;/^$/d;s/\(.*\);\(.*\)/\1###\2/'
+          sed 's/.*label="//g;s/" link="/###/g;s/".*//;/^$/d'
       )
     fi
   done < <(sgrep '"name=\"".."\""' "$path" | sed 's/^name="//;s/"name="/\n/g;s/"$//')
