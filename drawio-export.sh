@@ -82,6 +82,7 @@ export_diagram_file() {
   # shellcheck disable=SC2086
   "$DRAWIO_CLI" \
     --no-sandbox \
+    --disable-dev-shm-usage \
     -x \
     -f "$export_type" \
     $CLI_OPTIONS \
@@ -190,7 +191,7 @@ include_link_in_asciidoc_page() {
 args="${*}"
 if [ -n "$args" ]; then
   # shellcheck disable=SC2086
-  "$DRAWIO_CLI" --no-sandbox $args
+  "$DRAWIO_CLI" --no-sandbox --disable-dev-shm-usage $args
   exit 0
 fi
 
