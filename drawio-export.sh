@@ -35,7 +35,11 @@ function export_pages() {
       $CLI_OPTIONS \
       -p "$pagenum" \
       -o "$output_file" \
-      "$path" 2>/dev/null
+      "$path" 2> >(
+        # Remove Election 9 deprecation warnings from error output
+        grep -v "allowRendererProcessReuse is deprecated" |
+          grep -v "DeprecationWarning: Passing functions"
+      )
 
     if [ "$FILEEXT" == "adoc" ]; then
       printf "+++ generate %s file\n" "$FILEEXT"
