@@ -6,37 +6,85 @@
 +++ generate png file
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.png
 +++ generate adoc file
+./in/tests-adoc/file1-Page-1.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 ++ export page 2 : Page 2
 +++ generate png file
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-2.png
 +++ generate adoc file
+./in/tests-adoc/file1-Page-2.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 + export file : ./in/folder1/file2.1.drawio
 ++ prepare export folder : ./in/folder1/tests-adoc
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.png
 +++ generate adoc file
+./in/folder1/tests-adoc/file2.1-Page-1.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 ++ export page 2 : Page 2
 +++ generate png file
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-2.png
 +++ generate adoc file
+./in/folder1/tests-adoc/file2.1-Page-2.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 + export file : ./in/folder1/file2.2.drawio
 ++ prepare export folder : ./in/folder1/tests-adoc
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.png
 +++ generate adoc file
+./in/folder1/tests-adoc/file2.2-Page-1.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 ++ export page 2 : Page 2
 +++ generate png file
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-2.png
 +++ generate adoc file
+./in/folder1/tests-adoc/file2.2-Page-2.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 + export file : ./in/folder2/folder3/file3.drawio
 ++ prepare export folder : ./in/folder2/folder3/tests-adoc
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.png
 +++ generate adoc file
+./in/folder2/folder3/tests-adoc/file3-Page-1.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
 ++ export page 2 : Page 2
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-2.png
 +++ generate adoc file
+./in/folder2/folder3/tests-adoc/file3-Page-2.adoc
++++ include links in adoc file
+link 1 : https://github.com/rlespinasse/qanda
+link text 1 : Some text
+link 2 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
