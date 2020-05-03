@@ -46,19 +46,30 @@ function export_pages() {
         echo ""
         echo "image::${protected_filename}-${protected_page}.${pagefileext}[${page}]"
         echo ""
-        {
-          printf "\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x00"
-          sgrep '"name=\"'"$page"'\""..">".."<"' "$path" | sed 's/<$//;s/.*">//' | base64 -d -w 0
-        } |
-          (gzip -dc 2>/dev/null || true) |
-          sed 's@+@ @g;s@%@\\x@g' |
-          xargs -0 printf "%b" |
+      } >"$adoc_file"
+      echo "$adoc_file"
+
+      printf "+++ include links in %s file\n" "$FILEEXT"
+
+      xmldata=$({
+        printf "\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x00"
+        sgrep '"name=\"'"$page"'\""..">".."<"' "$path" | sed 's/<$//;s/.*">//' | base64 -d -w 0
+      } | (gzip -dc 2>/dev/null || true) | sed 's@+@ @g;s@%@\\x@g')
+
+      local linknum=0
+      while read -r linkdata; do
+        linknum=$((linknum + 1))
+        local text="${linkdata//###*/}"
+        local link="${linkdata//*###/}"
+        printf "link %s : %s\n" "$linknum" "$link"
+        printf "link text %s : %s\n" "$linknum" "$text"
+        printf "* %s[%s]\n" "$link" "$text" >>"$adoc_file"
+      done < <(
+        printf "%b" "$xmldata" |
           sgrep '"<UserObject"..">"' |
           sed 's/<UserObject/\n/g' |
-          sed 's/.*label="//g;s/" link="/;/g;s/".*//;/^$/d;s/\(.*\);\(.*\)/* \2[\1]/'
-
-        echo ""
-      } >"$adoc_file"
+          sed 's/.*label="//g;s/" link="/;/g;s/".*//;/^$/d;s/\(.*\);\(.*\)/\1###\2/'
+      )
     fi
   done < <(sgrep '"name=\"".."\""' "$path" | sed 's/^name="//;s/"name="/\n/g;s/"$//')
 }
