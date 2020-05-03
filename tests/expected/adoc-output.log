@@ -1,29 +1,42 @@
-prepare './empty_in/tests-adoc' folder
-prepare './in/tests-adoc' folder
-export page 1 - ./in/file1.drawio
++ export file : ./empty_in/empty.drawio
+++ prepare export folder : ./empty_in/tests-adoc
++ export file : ./in/file1.drawio
+++ prepare export folder : ./in/tests-adoc
+++ export page 1 : Page-1
++++ generate png file
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.png
-create page 1 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.adoc
-export page 2 - ./in/file1.drawio
-./in/file1.drawio -> ./in/tests-adoc/file1-Page 2.png
-create page 2 > ./in/file1.drawio -> ./in/tests-adoc/file1-Page 2.adoc
-prepare './in/folder1/tests-adoc' folder
-export page 1 - ./in/folder1/file2.1.drawio
++++ generate adoc file
+++ export page 2 : Page 2
++++ generate png file
+./in/file1.drawio -> ./in/tests-adoc/file1-Page-2.png
++++ generate adoc file
++ export file : ./in/folder1/file2.1.drawio
+++ prepare export folder : ./in/folder1/tests-adoc
+++ export page 1 : Page-1
++++ generate png file
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.png
-create page 1 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.adoc
-export page 2 - ./in/folder1/file2.1.drawio
-./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page 2.png
-create page 2 > ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page 2.adoc
-prepare './in/folder1/tests-adoc' folder
-export page 1 - ./in/folder1/file2.2.drawio
++++ generate adoc file
+++ export page 2 : Page 2
++++ generate png file
+./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-2.png
++++ generate adoc file
++ export file : ./in/folder1/file2.2.drawio
+++ prepare export folder : ./in/folder1/tests-adoc
+++ export page 1 : Page-1
++++ generate png file
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.png
-create page 1 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.adoc
-export page 2 - ./in/folder1/file2.2.drawio
-./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page 2.png
-create page 2 > ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page 2.adoc
-prepare './in/folder2/folder3/tests-adoc' folder
-export page 1 - ./in/folder2/folder3/file3.drawio
++++ generate adoc file
+++ export page 2 : Page 2
++++ generate png file
+./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-2.png
++++ generate adoc file
++ export file : ./in/folder2/folder3/file3.drawio
+++ prepare export folder : ./in/folder2/folder3/tests-adoc
+++ export page 1 : Page-1
++++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.png
-create page 1 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.adoc
-export page 2 - ./in/folder2/folder3/file3.drawio
-./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page 2.png
-create page 2 > ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page 2.adoc
++++ generate adoc file
+++ export page 2 : Page 2
++++ generate png file
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-2.png
++++ generate adoc file
