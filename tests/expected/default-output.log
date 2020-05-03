@@ -1,21 +1,34 @@
-prepare './empty_in/export' folder
-prepare './in/export' folder
-export page 1 - ./in/file1.drawio
++ export file : ./empty_in/empty.drawio
+++ prepare export folder : ./empty_in/export
++ export file : ./in/file1.drawio
+++ prepare export folder : ./in/export
+++ export page 1 : Page-1
++++ generate pdf file
 ./in/file1.drawio -> ./in/export/file1-Page-1.pdf
-export page 2 - ./in/file1.drawio
-./in/file1.drawio -> ./in/export/file1-Page 2.pdf
-prepare './in/folder1/export' folder
-export page 1 - ./in/folder1/file2.1.drawio
+++ export page 2 : Page 2
++++ generate pdf file
+./in/file1.drawio -> ./in/export/file1-Page-2.pdf
++ export file : ./in/folder1/file2.1.drawio
+++ prepare export folder : ./in/folder1/export
+++ export page 1 : Page-1
++++ generate pdf file
 ./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page-1.pdf
-export page 2 - ./in/folder1/file2.1.drawio
-./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page 2.pdf
-prepare './in/folder1/export' folder
-export page 1 - ./in/folder1/file2.2.drawio
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page-2.pdf
++ export file : ./in/folder1/file2.2.drawio
+++ prepare export folder : ./in/folder1/export
+++ export page 1 : Page-1
++++ generate pdf file
 ./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page-1.pdf
-export page 2 - ./in/folder1/file2.2.drawio
-./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page 2.pdf
-prepare './in/folder2/folder3/export' folder
-export page 1 - ./in/folder2/folder3/file3.drawio
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page-2.pdf
++ export file : ./in/folder2/folder3/file3.drawio
+++ prepare export folder : ./in/folder2/folder3/export
+++ export page 1 : Page-1
++++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-1.pdf
-export page 2 - ./in/folder2/folder3/file3.drawio
-./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page 2.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-2.pdf

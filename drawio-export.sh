@@ -12,6 +12,7 @@ function export_pages() {
   local path="$1"
   local folder="$2"
   local filename="$3"
+  local protected_filename="${filename// /-}"
   local pagenum=0
   local pagefileext="$FILEEXT"
 
@@ -20,10 +21,11 @@ function export_pages() {
   fi
 
   while read -r page; do
+    local protected_page="${page// /-}"
     pagenum=$((pagenum + 1))
-    printf "export page %s - %s\n" "$pagenum" "$path"
-
-    output_file="$folder/$FOLDER/$filename-$page.$pagefileext"
+    printf "++ export page %s : %s\n" "$pagenum" "$page"
+    printf "+++ generate %s file\n" "$pagefileext"
+    output_file="$folder/$FOLDER/$protected_filename-$protected_page.$pagefileext"
 
     # shellcheck disable=SC2086
     "$DRAWIO_CLI" \
@@ -36,13 +38,13 @@ function export_pages() {
       "$path" 2>/dev/null
 
     if [ "$FILEEXT" == "adoc" ]; then
-      adoc_file="$folder/$FOLDER/$filename-$page.$FILEEXT"
-      printf "create page %s > %s -> %s\n" "$pagenum" "$path" "$adoc_file"
+      printf "+++ generate %s file\n" "$FILEEXT"
 
+      adoc_file="$folder/$FOLDER/$protected_filename-$protected_page.$FILEEXT"
       {
         echo "= ${filename} ${page}"
         echo ""
-        echo "image::${filename}-${page}.${pagefileext}[${page}]"
+        echo "image::${protected_filename}-${protected_page}.${pagefileext}[${page}]"
         echo ""
         {
           printf "\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x00"
@@ -63,12 +65,12 @@ function export_pages() {
 
 function export_file() {
   while read -r current_path; do
+    echo "+ export file : $current_path"
     current_folder=$(dirname "$current_path")
     current_file=$(basename "$current_path")
-
     current_filename="${current_file%.*}"
 
-    echo "prepare '$current_folder/$FOLDER' folder"
+    echo "++ prepare export folder : $current_folder/$FOLDER"
     mkdir -p "$current_folder/$FOLDER"
 
     export_pages "$current_path" "$current_folder" "$current_filename"
