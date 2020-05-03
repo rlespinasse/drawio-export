@@ -7,6 +7,7 @@
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.png
 +++ generate adoc file
 ./in/tests-adoc/file1-Page-1.adoc
+image 'file1-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -17,6 +18,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-2.png
 +++ generate adoc file
 ./in/tests-adoc/file1-Page-2.adoc
+image 'file1-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -29,6 +31,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.png
 +++ generate adoc file
 ./in/folder1/tests-adoc/file2.1-Page-1.adoc
+image 'file2.1-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -39,6 +42,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-2.png
 +++ generate adoc file
 ./in/folder1/tests-adoc/file2.1-Page-2.adoc
+image 'file2.1-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -51,6 +55,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.png
 +++ generate adoc file
 ./in/folder1/tests-adoc/file2.2-Page-1.adoc
+image 'file2.2-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -61,6 +66,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-2.png
 +++ generate adoc file
 ./in/folder1/tests-adoc/file2.2-Page-2.adoc
+image 'file2.2-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -73,6 +79,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.png
 +++ generate adoc file
 ./in/folder2/folder3/tests-adoc/file3-Page-1.adoc
+image 'file3-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
@@ -83,6 +90,7 @@ link 2 : https://github.com/rlespinasse/qanda
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-2.png
 +++ generate adoc file
 ./in/folder2/folder3/tests-adoc/file3-Page-2.adoc
+image 'file3-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda

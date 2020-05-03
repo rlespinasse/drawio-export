@@ -57,8 +57,10 @@ export_drawio_page() {
     export_type="png"
   fi
 
+  local output_file
   local output_filename
-  output_filename="$folder/$OUTPUT_FOLDER/${filename// /-}-${page// /-}"
+  output_file="${filename// /-}-${page// /-}"
+  output_filename="$folder/$OUTPUT_FOLDER/$output_file"
 
   printf "++ export page %s : %s\n" "$pagenum" "$page"
   printf "+++ generate %s file\n" "$export_type"
@@ -66,7 +68,8 @@ export_drawio_page() {
 
   if [ "$EXPORT_TYPE" == "adoc" ]; then
     echo "+++ generate adoc file"
-    create_asciidoc_page "$path" "$filename" "$page" "$output_filename"
+    create_asciidoc_page "$path" "$filename" "$page" "$output_filename" "$output_file"
+    echo "image '$output_file.png'"
 
     echo "+++ include links in adoc file"
     include_links_in_asciidoc_page "$path" "$page" "$output_filename"
@@ -100,11 +103,12 @@ create_asciidoc_page() {
   local filename="$2"
   local page="$3"
   local output_filename="$4"
+  local output_file="$5"
 
   {
     echo "= ${filename} ${page}"
     echo ""
-    echo "image::${output_filename}.png[${page}]"
+    echo "image::${output_file}.png[${page}]"
     echo ""
   } >"$output_filename.adoc"
   echo "$output_filename.adoc"
