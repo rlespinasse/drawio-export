@@ -1,3 +1,10 @@
+## [2.2.1](http://github.com/rlespinasse/drawio-export/compare/2.2.0...2.2.1) (2020-05-03)
+
+
+### Bug Fixes
+
+* use correct path to image in asciidoc page ([28888c1](http://github.com/rlespinasse/drawio-export/commit/28888c1a16042b527c59bd324639171397db84e2))
+
 # [2.2.0](http://github.com/rlespinasse/drawio-export/compare/2.1.0...2.2.0) (2020-05-03)
 
 
