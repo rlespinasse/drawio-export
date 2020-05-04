@@ -45,7 +45,7 @@ For example, export draw.io diagrams as PNG with transparent background
 [source,bash]
 ----
 $ cd directory-with-drawio-files
-$ docker run -it -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_FILEEXT="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
+$ docker run -it -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_CLI_OPTIONS="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
 prepare './images' folder
 cleanup './images/file-*' content
 export page 1 - ./file1.drawio
