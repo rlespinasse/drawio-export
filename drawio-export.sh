@@ -89,7 +89,7 @@ export_diagram_file() {
     -x \
     -f "$export_type" \
     $CLI_OPTIONS \
-    -p "$pagenum" \
+    -p "$((pagenum - 1))" \
     -o "$output_filename.$export_type" \
     "$path" 2> >(
       # Remove Election 9 deprecation warnings from error output
