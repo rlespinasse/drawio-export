@@ -1,7 +1,9 @@
 + export file : ./empty_in/empty.drawio
 ++ prepare export folder : ./empty_in/tests-adoc
+++ cleanup export content : ./empty_in/tests-adoc/empty*
 + export file : ./in/file1.drawio
 ++ prepare export folder : ./in/tests-adoc
+++ cleanup export content : ./in/tests-adoc/file1*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/file1.drawio -> ./in/tests-adoc/file1-Page-1.png
@@ -26,6 +28,7 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder1/file2.1.drawio
 ++ prepare export folder : ./in/folder1/tests-adoc
+++ cleanup export content : ./in/folder1/tests-adoc/file2.1*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.1.drawio -> ./in/folder1/tests-adoc/file2.1-Page-1.png
@@ -50,6 +53,7 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder1/file2.2.drawio
 ++ prepare export folder : ./in/folder1/tests-adoc
+++ cleanup export content : ./in/folder1/tests-adoc/file2.2*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.2.drawio -> ./in/folder1/tests-adoc/file2.2-Page-1.png
@@ -74,6 +78,7 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder2/folder3/file3.drawio
 ++ prepare export folder : ./in/folder2/folder3/tests-adoc
+++ cleanup export content : ./in/folder2/folder3/tests-adoc/file3*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-adoc/file3-Page-1.png

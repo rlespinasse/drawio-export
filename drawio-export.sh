@@ -29,6 +29,9 @@ export_drawio_files() {
     echo "++ prepare export folder : $folder/$OUTPUT_FOLDER"
     mkdir -p "$folder/$OUTPUT_FOLDER"
 
+    echo "++ cleanup export content : $folder/$OUTPUT_FOLDER/${filename}*"
+    find "$folder/$OUTPUT_FOLDER" -type f -name "${filename}*" -delete
+
     export_drawio_pages "$path" "$folder" "$filename"
   done < <(find . -name "*.drawio" | sort)
 }

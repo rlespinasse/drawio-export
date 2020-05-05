@@ -26,11 +26,14 @@ docker pull rlespinasse/drawio-export
 ----
 $ cd directory-with-drawio-files
 $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
-prepare './export' folder
-cleanup './export/file-*' content
-export page 1 - ./file1.drawio
++ export file : ./file1.drawio
+++ prepare export folder : ./export
+++ cleanup export content : ./export/file1*
+++ export page 1 : Page-1
++++ generate pdf file
 ./file1.drawio -> ./export/file1-Page-1.pdf
-export page 2 - ./file1.drawio
+++ export page 2 : Page 2
++++ generate pdf file
 ./file1.drawio -> ./export/file1-Page-2.pdf
 ----
 
@@ -46,12 +49,15 @@ For example, export draw.io diagrams as PNG with transparent background
 ----
 $ cd directory-with-drawio-files
 $ docker run -it -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_CLI_OPTIONS="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
-prepare './images' folder
-cleanup './images/file-*' content
-export page 1 - ./file1.drawio
-./file1.drawio -> ./export/file1-Page-1.png
-export page 2 - ./file1.drawio
-./file1.drawio -> ./export/file1-Page-2.png
++ export file : ./file1.drawio
+++ prepare export folder : ./images
+++ cleanup export content : ./images/file1*
+++ export page 1 : Page-1
++++ generate png file
+./file1.drawio -> ./images/file1-Page-1.png
+++ export page 2 : Page 2
++++ generate png file
+./file1.drawio -> ./images/file1-Page-2.png
 ----
 
 You can print the available options with
@@ -83,12 +89,14 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
+
       - name: Export drawio files to asciidoctor and png files
-        uses: docker://rlespinasse/drawio-export
+        uses: docker://rlespinasse/drawio-export@<VERSION>
         env:
           DRAWIO_EXPORT_FILEEXT: adoc
           DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS: -t
           DRAWIO_EXPORT_FOLDER: assets
+
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
