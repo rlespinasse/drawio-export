@@ -1,0 +1,23 @@
+Usage: drawio-export [Options]
+Options:
+  -E, --fileext <fileext>           Extension of exported files (default 'pdf').
+                                    pdf, png, jpg, svg, vsdx, adoc
+  -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
+                                    see 'Draw.io CLI Options' section.
+  -F, --folder <folder>             Export folder name (default 'export').
+  -h, --help                        Display this help message.
+
+Draw.io CLI Options:
+  -q, --quality <quality>           Output image quality for JPEG (default: 90).
+  -t, --transparent                 Set transparent background for PNG.
+  -e, --embed-diagram               Includes a copy of the diagram (for PNG format only).
+  -b, --border <border>             Sets the border width around the diagram (default: 0).
+  -s, --scale <scale>               Scales the diagram size.
+  --width <width>                   Fits the generated image/pdf into the specified width, preserves aspect ratio.
+  --height <height>                 Fits the generated image/pdf into the specified height, preserves aspect ratio.
+  --crop                            Crops PDF to diagram size.
+
+Environment variables:
+  DRAWIO_EXPORT_FILEEXT             Same as '--fileext', will be override if '--fileext' is set.
+  DRAWIO_EXPORT_CLI_OPTIONS         Same as '--cli-options', will be override if '--cli-options' is set.
+  DRAWIO_EXPORT_FOLDER              Same as '--export-folder', will be override if '--export-folder' is set.

@@ -22,6 +22,13 @@ docker pull rlespinasse/drawio-export
 
 == Usage
 
+.Print the available options
+[source,bash]
+----
+docker run -it rlespinasse/drawio-export --help
+----
+
+.Simple run with default options
 [source,bash]
 ----
 $ cd directory-with-drawio-files
@@ -35,36 +42,6 @@ $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./file1.drawio -> ./export/file1-Page-2.pdf
-----
-
-You can override default configuration
-
-* `DRAWIO_EXPORT_FILEEXT`: extention of exported files (default `pdf`)
-* `DRAWIO_EXPORT_CLI_OPTIONS`: draw.io cli options to export (default `--crop`)
-* `DRAWIO_EXPORT_FOLDER`: folder of exported files, with tree preservation (default `export`)
-
-For example, export draw.io diagrams as PNG with transparent background
-
-[source,bash]
-----
-$ cd directory-with-drawio-files
-$ docker run -it -v $(pwd):/data -e DRAWIO_EXPORT_FILEEXT=png -e DRAWIO_EXPORT_CLI_OPTIONS="-t -b 1" -e DRAWIO_EXPORT_FOLDER=images rlespinasse/drawio-export
-+ export file : ./file1.drawio
-++ prepare export folder : ./images
-++ cleanup export content : ./images/file1*
-++ export page 1 : Page-1
-+++ generate png file
-./file1.drawio -> ./images/file1-Page-1.png
-++ export page 2 : Page 2
-+++ generate png file
-./file1.drawio -> ./images/file1-Page-2.png
-----
-
-You can print the available options with
-
-[source,bash]
-----
-docker run -it rlespinasse/drawio-export --help
 ----
 
 == Integrations
