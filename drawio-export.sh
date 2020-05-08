@@ -180,6 +180,8 @@ include_link_in_asciidoc_page() {
       sed 's/&amp;nbsp;/ /g' |
       # Clean <div>text</div>
       sed 's/&lt;div&gt;/ /g;s/&lt;\/div&gt;\?/ /g' |
+      # Manage '--' (Em dash) string in asciidoc
+      sed 's/\([^-]\+\)\(--\)/\1\\\2/g' |
       # Trim space
       sed 's/\s\+/ /g;s/^\s//;s/\s$//'
   )
@@ -195,6 +197,8 @@ include_link_in_asciidoc_page() {
       sed 's/&amp;nbsp;/ /g' |
       # Clean <div>text</div>
       sed 's/&lt;div&gt;/ /g;s/&lt;\/div&gt;\?/ /g' |
+      # Manage '--' (Em dash) string in asciidoc
+      sed 's/\([^-]\+\)\(--\)/\1\\\2/g' |
       # Trim space
       sed 's/\s\+/ /g;s/^\s//;s/\s$//'
   )
