@@ -3,17 +3,34 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-link_separator='###'
-
-if [ -z "${DRAWIO_CLI:-}" ]; then
-  echo >&2 "define DRAWIO_CLI as the path to draw.io desktop application"
-  exit 1
-fi
-
-command -v sgrep >/dev/null 2>&1 || {
-  echo >&2 "I require sgrep but it's not installed.  Aborting."
-  exit 1
+#/ Usage: drawio-export [Options]
+#/ Options:
+#/   -E, --fileext <fileext>           Extension of exported files (default 'pdf').
+#/                                     pdf, png, jpg, svg, vsdx, adoc
+#/   -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
+#/                                     see 'Draw.io CLI Options' section.
+#/   -F, --folder <folder>             Export folder name (default 'export').
+#/   -h, --help                        Display this help message.
+#/
+#/ Draw.io CLI Options:
+#/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
+#/   -t, --transparent                 Set transparent background for PNG.
+#/   -e, --embed-diagram               Includes a copy of the diagram (for PNG format only).
+#/   -b, --border <border>             Sets the border width around the diagram (default: 0).
+#/   -s, --scale <scale>               Scales the diagram size.
+#/   --width <width>                   Fits the generated image/pdf into the specified width, preserves aspect ratio.
+#/   --height <height>                 Fits the generated image/pdf into the specified height, preserves aspect ratio.
+#/   --crop                            Crops PDF to diagram size.
+#/
+#/ Environment variables:
+#/   DRAWIO_EXPORT_FILEEXT             Same as '--fileext', will be override if '--fileext' is set.
+#/   DRAWIO_EXPORT_CLI_OPTIONS         Same as '--cli-options', will be override if '--cli-options' is set.
+#/   DRAWIO_EXPORT_FOLDER              Same as '--export-folder', will be override if '--export-folder' is set.
+usage() {
+  grep '^#/' "$0" | cut -c4-
 }
+
+# ----------------------------------------------------
 
 export_drawio_files() {
   local folder
@@ -195,19 +212,58 @@ include_link_in_asciidoc_page() {
   fi
 }
 
-args="${*}"
-if [ -n "$args" ]; then
-  # shellcheck disable=SC2086
-  "$DRAWIO_CLI" --no-sandbox --disable-dev-shm-usage $args
-  exit 0
-fi
+# ----------------------------------------------------
 
-DEFAULT_FOLDER="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # shellcheck disable=SC1090
-source "$DEFAULT_FOLDER/drawio-default.env"
-
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/drawio-default.env"
 EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
+
+GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder: --name "$0" -- "$@")
+# shellcheck disable=SC2181
+if [ $? != 0 ]; then
+  echo "Failed to parse options...exiting." >&2
+  usage
+  exit 1
+fi
+
+eval set -- "$GETOPT"
+while true; do
+  case "$1" in
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  -E | --fileext)
+    EXPORT_TYPE=$2
+    shift 2
+    ;;
+  -C | --cli-options)
+    CLI_OPTIONS=$2
+    shift 2
+    ;;
+  -F | --folder)
+    OUTPUT_FOLDER=$2
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  esac
+done
+
+link_separator='###'
+
+if [ -z "${DRAWIO_CLI:-}" ]; then
+  echo >&2 "define DRAWIO_CLI as the path to draw.io desktop application"
+  exit 1
+fi
+
+command -v sgrep >/dev/null 2>&1 || {
+  echo >&2 "I require sgrep but it's not installed.  Aborting."
+  exit 1
+}
 
 export_drawio_files

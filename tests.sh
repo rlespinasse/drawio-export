@@ -1,79 +1,101 @@
 #!/usr/bin/env bash
+#set -x
 IFS=$'\n\t'
 
 # shellcheck disable=SC1091
 source ./drawio-default.env
 
 function cleanup() {
-  echo "+ cleanup '$1' folder(s)"
-  find tests -name "$1" | while read -r output; do
-    rm -rf "$output"
-  done
+  if [ -n "$1" ]; then
+    echo "+ cleanup '$1' folder(s)"
+    find tests -name "$1" | while read -r output; do
+      rm -rf "$output"
+    done
+  fi
 }
 
 function run_test() {
-  echo "+ run '$1' command"
+  local test_name="${1:-}"
+  local type="${2:-}"
+  local fileext="${3:-}"
+  local cli_options="${4:-}"
+  local folder="${5:-}"
+  local args="${6:-}"
+  local test_output_folder="${7:-}"
 
-  # shellcheck disable=SC2086
-  docker run -t \
-    -e DRAWIO_EXPORT_FILEEXT="$2" \
-    -e DRAWIO_EXPORT_CLI_OPTIONS="$3" \
-    -e DRAWIO_EXPORT_FOLDER="$4" \
-    -v "$(pwd)"/tests/data:/data \
-    "${TEST_DOCKER_IMAGE}" $5 | tee "tests/actual/$1-output.log"
+  echo "+ run '$test_name' command"
 
-  echo "+ run '$1' test"
-  # shellcheck disable=SC2038
-  find . -type d -name "$4" | xargs -n 1 -I {} find "{}" -type f | tee "tests/actual/$1-files.log"
-  output_test=$(diff --strip-trailing-cr "tests/actual/$1-output.log" "tests/expected/$1-output.log")
-  files_test=$(diff --strip-trailing-cr <(sort "tests/actual/$1-files.log") <(sort "tests/expected/$1-files.log"))
+  if [ "$type" == "envvars" ]; then
+    # shellcheck disable=SC2086
+    docker run -t \
+      -e DRAWIO_EXPORT_FILEEXT="$fileext" \
+      -e DRAWIO_EXPORT_CLI_OPTIONS="$cli_options" \
+      -e DRAWIO_EXPORT_FOLDER="$folder" \
+      -v "$(pwd)"/tests/data:/data "${TEST_DOCKER_IMAGE}" |
+      tee "tests/actual/$test_name-output.log"
+  elif [ "$type" == "args" ]; then
+    # shellcheck disable=SC2086
+    docker run -t "${TEST_DOCKER_IMAGE}" $args |
+      tee "tests/actual/$test_name-output.log"
+  elif [ "$type" == "options" ]; then
+    # shellcheck disable=SC2086
+    docker run -t -v "$(pwd)"/tests/data:/data "${TEST_DOCKER_IMAGE}" \
+      -E "$fileext" -C "$cli_options" -F "$folder" |
+      tee "tests/actual/$test_name-output.log"
+  elif [ "$type" == "long-options" ]; then
+    # shellcheck disable=SC2086
+    docker run -t -v "$(pwd)"/tests/data:/data "${TEST_DOCKER_IMAGE}" \
+      --fileext "$fileext" --cli-options "$cli_options" --folder "$folder" |
+      tee "tests/actual/$test_name-output.log"
+  else
+    docker run -t -v "$(pwd)"/tests/data:/data "${TEST_DOCKER_IMAGE}" | tee "tests/actual/$test_name-output.log"
+  fi
 
-  echo "+ check '$1' test"
+  echo "+ run '$test_name' test"
+  touch "tests/expected/$test_name-output.log"
+  output_test=$(diff --strip-trailing-cr "tests/actual/$test_name-output.log" "tests/expected/$test_name-output.log")
+
+  if [ -n "$test_output_folder" ]; then
+    # shellcheck disable=SC2038
+    find . -type d -name "$test_output_folder" | xargs -n 1 -I {} find "{}" -type f | tee "tests/actual/$test_name-files.log"
+    touch "tests/expected/$test_name-files.log"
+    files_test=$(diff --strip-trailing-cr <(sort "tests/actual/$test_name-files.log") <(sort "tests/expected/$test_name-files.log"))
+  fi
+
+  echo "+ check '$test_name' test"
   if [ -n "$output_test" ]; then
-    echo >&2 "ERR! unexpected $1 output"
+    echo >&2 "ERR! unexpected $test_name output"
     echo "$output_test"
   fi
 
   if [ -n "$files_test" ]; then
-    echo >&2 "ERR! unexpected $1 files"
+    echo >&2 "ERR! unexpected $test_name files"
     echo "$files_test"
   fi
 
+  cleanup "$test_output_folder"
+
   if [ -n "$output_test" ] || [ -n "$files_test" ]; then
-    return 1
+    echo >&2 "ERR! test $test_name"
+    exit 1
   fi
-  return 0
 }
 
 mkdir -p tests/actual
 cleanup "export"
 cleanup "tests-*"
 
-#run_test "name" "ext" "cli_options" "folder" "args"
-run_test "default" "$DEFAULT_DRAWIO_EXPORT_FILEEXT" "$DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS" "$DEFAULT_DRAWIO_EXPORT_FOLDER" ""
-result_default=$?
-run_test "png" "png" "" "tests-png" ""
-result_png=$?
-run_test "other" "notused" "notused" "test-notused" "-V"
-result_other=$?
-run_test "adoc" "adoc" "" "tests-adoc" ""
-result_adoc=$?
+#run_test "test name" "type" "fileext" "cli_options" "folder" "args" "output folder for test"
 
-if [ "$result_default" == "1" ] ||
-  [ "$result_png" == "1" ] ||
-  [ "$result_adoc" == "1" ] ||
-  [ "$result_other" == "1" ]; then
+run_test "args-png-short" "options" "png" "-t" "tests-args-png-short" "" "tests-args-png-short"
+run_test "args-adoc-short" "options" "adoc" "-t" "tests-args-adoc-short" "" "tests-args-adoc-short"
 
-  if [ "$result_default" == "1" ]; then
-    echo >&2 "ERR! test default"
-  fi
-  if [ "$result_png" == "1" ]; then
-    echo >&2 "ERR! test png"
-  fi
-  if [ "$result_other" == "1" ]; then
-    echo >&2 "ERR! test other"
-  fi
-  exit 1
-fi
+run_test "args-png-long" "long-options" "png" "-t" "tests-args-png-long" "" "tests-args-png-long"
+run_test "args-adoc-long" "long-options" "adoc" "-t" "tests-args-adoc-long" "" "tests-args-adoc-long"
 
-echo "All tests are valid"
+run_test "default" "none" "" "" "" "" "$DEFAULT_DRAWIO_EXPORT_FOLDER"
+run_test "envvar-png" "envvars" "png" "-t" "tests-envvar-png" "" "tests-envvar-png"
+run_test "envvar-adoc" "envvars" "adoc" "-t" "tests-envvar-adoc" "" "tests-envvar-adoc"
+
+run_test "args-help-short" "args" "" "" "" "-h" ""
+run_test "args-help-long" "args" "" "" "" "--help" ""
