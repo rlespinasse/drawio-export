@@ -1,5 +1,10 @@
 name: Build
-on: [push, pull_request]
+# Build only for master branch and pull requests
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
