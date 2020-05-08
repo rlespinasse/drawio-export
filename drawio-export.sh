@@ -208,7 +208,7 @@ include_link_in_asciidoc_page() {
     echo >&2 "WARNING: link between pages is not currently supported"
   else
     printf "link %s : %s\n" "$linknum" "$link"
-    printf "* %s&[%s]\n" "$link" "$text" >>"$output_filename.adoc"
+    printf "* %s[%s]\n" "$link" "$text" >>"$output_filename.adoc"
   fi
 }
 
