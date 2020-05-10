@@ -1,4 +1,3 @@
 export/
-tests-*/
-actual/
+test-*/
 node_modules/
