@@ -1,3 +1,5 @@
+draw-export: unrecognized option '--wrong-argument'
+Failed to parse options...exiting.
 Usage: drawio-export [Options]
 Options:
   -E, --fileext <fileext>           Extension of exported files (default 'pdf').

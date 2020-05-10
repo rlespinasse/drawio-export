@@ -1,0 +1,39 @@
++ export file : ./empty_in/empty.drawio
+++ prepare export folder : ./empty_in/test-assets-pdf
+++ cleanup export content : ./empty_in/test-assets-pdf/empty*
++ export file : ./in/file1.drawio
+++ prepare export folder : ./in/test-assets-pdf
+++ cleanup export content : ./in/test-assets-pdf/file1*
+++ export page 1 : Page-1
++++ generate pdf file
+./in/file1.drawio -> ./in/test-assets-pdf/file1-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./in/file1.drawio -> ./in/test-assets-pdf/file1-Page-2.pdf
++ export file : ./in/folder1/file2.1.drawio
+++ prepare export folder : ./in/folder1/test-assets-pdf
+++ cleanup export content : ./in/folder1/test-assets-pdf/file2.1*
+++ export page 1 : Page-1
++++ generate pdf file
+./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-pdf/file2.1-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-pdf/file2.1-Page-2.pdf
++ export file : ./in/folder1/file2.2.drawio
+++ prepare export folder : ./in/folder1/test-assets-pdf
+++ cleanup export content : ./in/folder1/test-assets-pdf/file2.2*
+++ export page 1 : Page-1
++++ generate pdf file
+./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-pdf/file2.2-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-pdf/file2.2-Page-2.pdf
++ export file : ./in/folder2/folder3/file3.drawio
+++ prepare export folder : ./in/folder2/folder3/test-assets-pdf
+++ cleanup export content : ./in/folder2/folder3/test-assets-pdf/file3*
+++ export page 1 : Page-1
++++ generate pdf file
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-pdf/file3-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-pdf/file3-Page-2.pdf

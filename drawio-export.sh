@@ -224,13 +224,15 @@ EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
 
-GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder: --name "$0" -- "$@")
+set +e
+GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
   usage
   exit 1
 fi
+set -e
 
 eval set -- "$GETOPT"
 while true; do

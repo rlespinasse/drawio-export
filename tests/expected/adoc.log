@@ -1,14 +1,14 @@
 + export file : ./empty_in/empty.drawio
-++ prepare export folder : ./empty_in/tests-envvar-adoc
-++ cleanup export content : ./empty_in/tests-envvar-adoc/empty*
+++ prepare export folder : ./empty_in/test-assets-adoc
+++ cleanup export content : ./empty_in/test-assets-adoc/empty*
 + export file : ./in/file1.drawio
-++ prepare export folder : ./in/tests-envvar-adoc
-++ cleanup export content : ./in/tests-envvar-adoc/file1*
+++ prepare export folder : ./in/test-assets-adoc
+++ cleanup export content : ./in/test-assets-adoc/file1*
 ++ export page 1 : Page-1
 +++ generate png file
-./in/file1.drawio -> ./in/tests-envvar-adoc/file1-Page-1.png
+./in/file1.drawio -> ./in/test-assets-adoc/file1-Page-1.png
 +++ generate adoc file
-./in/tests-envvar-adoc/file1-Page-1.adoc
+./in/test-assets-adoc/file1-Page-1.adoc
 image 'file1-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -17,9 +17,9 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ export page 2 : Page 2
 +++ generate png file
-./in/file1.drawio -> ./in/tests-envvar-adoc/file1-Page-2.png
+./in/file1.drawio -> ./in/test-assets-adoc/file1-Page-2.png
 +++ generate adoc file
-./in/tests-envvar-adoc/file1-Page-2.adoc
+./in/test-assets-adoc/file1-Page-2.adoc
 image 'file1-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -27,13 +27,13 @@ link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder1/file2.1.drawio
-++ prepare export folder : ./in/folder1/tests-envvar-adoc
-++ cleanup export content : ./in/folder1/tests-envvar-adoc/file2.1*
+++ prepare export folder : ./in/folder1/test-assets-adoc
+++ cleanup export content : ./in/folder1/test-assets-adoc/file2.1*
 ++ export page 1 : Page-1
 +++ generate png file
-./in/folder1/file2.1.drawio -> ./in/folder1/tests-envvar-adoc/file2.1-Page-1.png
+./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-adoc/file2.1-Page-1.png
 +++ generate adoc file
-./in/folder1/tests-envvar-adoc/file2.1-Page-1.adoc
+./in/folder1/test-assets-adoc/file2.1-Page-1.adoc
 image 'file2.1-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -42,9 +42,9 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ export page 2 : Page 2
 +++ generate png file
-./in/folder1/file2.1.drawio -> ./in/folder1/tests-envvar-adoc/file2.1-Page-2.png
+./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-adoc/file2.1-Page-2.png
 +++ generate adoc file
-./in/folder1/tests-envvar-adoc/file2.1-Page-2.adoc
+./in/folder1/test-assets-adoc/file2.1-Page-2.adoc
 image 'file2.1-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -52,13 +52,13 @@ link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder1/file2.2.drawio
-++ prepare export folder : ./in/folder1/tests-envvar-adoc
-++ cleanup export content : ./in/folder1/tests-envvar-adoc/file2.2*
+++ prepare export folder : ./in/folder1/test-assets-adoc
+++ cleanup export content : ./in/folder1/test-assets-adoc/file2.2*
 ++ export page 1 : Page-1
 +++ generate png file
-./in/folder1/file2.2.drawio -> ./in/folder1/tests-envvar-adoc/file2.2-Page-1.png
+./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-adoc/file2.2-Page-1.png
 +++ generate adoc file
-./in/folder1/tests-envvar-adoc/file2.2-Page-1.adoc
+./in/folder1/test-assets-adoc/file2.2-Page-1.adoc
 image 'file2.2-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -67,9 +67,9 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ export page 2 : Page 2
 +++ generate png file
-./in/folder1/file2.2.drawio -> ./in/folder1/tests-envvar-adoc/file2.2-Page-2.png
+./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-adoc/file2.2-Page-2.png
 +++ generate adoc file
-./in/folder1/tests-envvar-adoc/file2.2-Page-2.adoc
+./in/folder1/test-assets-adoc/file2.2-Page-2.adoc
 image 'file2.2-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -77,13 +77,13 @@ link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/folder2/folder3/file3.drawio
-++ prepare export folder : ./in/folder2/folder3/tests-envvar-adoc
-++ cleanup export content : ./in/folder2/folder3/tests-envvar-adoc/file3*
+++ prepare export folder : ./in/folder2/folder3/test-assets-adoc
+++ cleanup export content : ./in/folder2/folder3/test-assets-adoc/file3*
 ++ export page 1 : Page-1
 +++ generate png file
-./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-envvar-adoc/file3-Page-1.png
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-adoc/file3-Page-1.png
 +++ generate adoc file
-./in/folder2/folder3/tests-envvar-adoc/file3-Page-1.adoc
+./in/folder2/folder3/test-assets-adoc/file3-Page-1.adoc
 image 'file3-Page-1.png'
 +++ include links in adoc file
 link text 1 : Some text
@@ -92,9 +92,9 @@ link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ export page 2 : Page 2
 +++ generate png file
-./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/tests-envvar-adoc/file3-Page-2.png
+./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-adoc/file3-Page-2.png
 +++ generate adoc file
-./in/folder2/folder3/tests-envvar-adoc/file3-Page-2.adoc
+./in/folder2/folder3/test-assets-adoc/file3-Page-2.adoc
 image 'file3-Page-2.png'
 +++ include links in adoc file
 link text 1 : Some text

@@ -10,16 +10,22 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
+      # Setup
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
       - uses: rlespinasse/github-slug-action@v2.x
+
+      # Build and test
       - name: Build docker image
         run: make build
         env:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
       - name: Test docker image
-        run: make test
+        run: make setup-test test
         env:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
+
+      # Release
       - uses: cycjimmy/semantic-release-action@v2
         with:
           semantic_version: 17.0.7

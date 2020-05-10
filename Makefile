@@ -6,12 +6,14 @@ build:
 
 RUN_ARGS?=
 run:
-	docker run -it -v $(PWD):/data ${DOCKER_IMAGE} ${RUN_ARGS}
+	@docker run -it -v $(PWD):/data ${DOCKER_IMAGE} ${RUN_ARGS}
+
+setup-test:
+	@npm install -g bats
 
 test:
-	@TEST_DOCKER_IMAGE=${DOCKER_IMAGE} ./tests.sh
+	@DOCKER_IMAGE=$(DOCKER_IMAGE) bats -r .
 
 cleanup:
 	@find tests -name "export" | xargs -I {} rm -r "{}"
-	@find tests -name "images" | xargs -I {} rm -r "{}"
-	@find tests -name "tests-*" | xargs -I {} rm -r "{}"
+	@find tests -name "test-*" | xargs -I {} rm -r "{}"
