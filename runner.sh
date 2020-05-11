@@ -103,19 +103,15 @@ export_diagram_file() {
   local output_filename="$4"
 
   # shellcheck disable=SC2086
-  "$DRAWIO_CLI" \
-    --no-sandbox \
+  DRAWIO_CLI_SUPPRESS_WARNINGS=true \
+    "$SCRIPT_FOLDER/cli-runner.sh" \
     --disable-dev-shm-usage \
     -x \
     -f "$export_type" \
     $CLI_OPTIONS \
     -p "$((pagenum - 1))" \
     -o "$output_filename.$export_type" \
-    "$path" 2> >(
-      # Remove Election 9 deprecation warnings from error output
-      grep -v "allowRendererProcessReuse is deprecated" |
-        grep -v "DeprecationWarning: Passing functions"
-    )
+    "$path"
 }
 
 create_asciidoc_page() {
@@ -218,8 +214,9 @@ include_link_in_asciidoc_page() {
 
 # ----------------------------------------------------
 
+SCRIPT_FOLDER=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 # shellcheck disable=SC1090
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/drawio-default.env"
+source "$SCRIPT_FOLDER/runner.env"
 EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}

@@ -1,4 +1,4 @@
-.PHONY: build test cleanup
+.PHONY: build run setup-test test cleanup
 
 DOCKER_IMAGE?=rlespinasse/drawio-export:local
 build:

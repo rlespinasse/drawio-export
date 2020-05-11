@@ -1,8 +1,11 @@
-FROM rlespinasse/drawio-cli:2.0.0
+FROM rlespinasse/drawio-cli:2.1.0
 
-COPY entrypoint.sh /drawio/entrypoint.sh
-COPY drawio-export.sh /drawio/drawio-export.sh
-COPY drawio-default.env /drawio/drawio-default.env
+# keep runner.sh from drawio-cli base image
+RUN mv runner.sh cli-runner.sh
+
+# setup the drawio-export files
+COPY runner.sh .
+COPY runner.env .
 
 WORKDIR /data
 CMD [ "" ]
