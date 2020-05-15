@@ -71,7 +71,7 @@ jobs:
         uses: docker://rlespinasse/drawio-export@<VERSION>
         env:
           DRAWIO_EXPORT_FILEEXT: adoc
-          DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS: -t
+          DRAWIO_EXPORT_CLI_OPTIONS: -t
           DRAWIO_EXPORT_FOLDER: assets
 
       - name: Commit changed files
