@@ -37,3 +37,12 @@
 ++ export page 2 : Page 2
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-png/file3-Page-2.png
++ export file : ./in/vscode.drawio
+++ prepare export folder : ./in/test-assets-png
+++ cleanup export content : ./in/test-assets-png/vscode*
+++ export page 1 : Page-1
++++ generate png file
+./in/vscode.drawio -> ./in/test-assets-png/vscode-Page-1.png
+++ export page 2 : Page-2
++++ generate png file
+./in/vscode.drawio -> ./in/test-assets-png/vscode-Page-2.png
