@@ -135,15 +135,26 @@ include_links_in_asciidoc_page() {
   local page="$2"
   local output_filename="$3"
 
-  local rawxml
-  rawxml=$(get_rawxml_diagram_page "$path" "$page")
+  local diagramdata
+  diagramdata="$(sgrep '"name=\"'"$page"'\""..">".."<"' "$path" | sed 's/<$//;s/.*">//;s/^\s*//;s/\s*$//;/^$/d')"
+
+  local xmldata
+  local xmlprint
+  if [ -n "$diagramdata" ]; then
+    xmldata=$(get_rawxml_diagram_page "$diagramdata" "$page")
+    xmlprint="%b"
+  else
+    xmldata=$(tr -d '\n' <"$path" | sgrep '"name=\"'"$page"'\""..">".."</diagram"')
+    xmlprint="%s"
+  fi
 
   local linknum=0
   while read -r linkdata; do
     linknum=$((linknum + 1))
     include_link_in_asciidoc_page "$linknum" "$linkdata" "$output_filename"
   done < <(
-    printf "%b" "$rawxml" |
+    # shellcheck disable=SC2059
+    printf "$xmlprint" "$xmldata" |
       sgrep '"<UserObject"..">"' |
       sed 's/<UserObject/\n/g' |
       sed 's/.*label="//g;s/" link="/'"$link_separator"'/g;s/".*//;/^$/d'
@@ -151,12 +162,12 @@ include_links_in_asciidoc_page() {
 }
 
 get_rawxml_diagram_page() {
-  local path="$1"
+  local data="$1"
   local page="$2"
 
   {
     printf "\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x00"
-    sgrep '"name=\"'"$page"'\""..">".."<"' "$path" | sed 's/<$//;s/.*">//' | base64 -d -w 0
+    echo "$data" | base64 -d -w 0
   } | (gzip -dc 2>/dev/null || true) | sed 's@+@ @g;s@%@\\x@g'
 }
 
