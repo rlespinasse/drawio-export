@@ -11,7 +11,7 @@ run:
 setup-test:
 	@npm install -g bats
 
-test:
+test: build
 	@DOCKER_IMAGE=$(DOCKER_IMAGE) bats -r .
 
 cleanup:

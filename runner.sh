@@ -59,9 +59,19 @@ export_drawio_pages() {
   local filename="$3"
 
   local pagenum=0
+
+  local page_suffix=false
+  if [ "$REMOVE_PAGE_SUFFIX" == "true" ]; then
+    local number_of_page=$(sgrep -c '"name=\"".."\""' "$path")
+
+    if [ "$number_of_page" -gt 1 ]; then
+      page_suffix=true
+    fi
+  fi
+
   while read -r page; do
     pagenum=$((pagenum + 1))
-    export_drawio_page "$pagenum" "$page" "$filename" "$path" "$folder"
+    export_drawio_page "$pagenum" "$page" "$filename" "$path" "$folder" "$page_suffix"
   done < <(sgrep '"name=\"".."\""' "$path" | sed 's/^name="//;s/"name="/\n/g;s/"$//')
 }
 
@@ -71,6 +81,7 @@ export_drawio_page() {
   local filename="$3"
   local path="$4"
   local folder="$5"
+  local page_suffix="$6"
 
   local export_type="$EXPORT_TYPE"
   if [ "$EXPORT_TYPE" == "adoc" ]; then
@@ -79,7 +90,11 @@ export_drawio_page() {
 
   local output_file
   local output_filename
+  if [ "$page_suffix" == "true" ]; then
   output_file="${filename// /-}-${page// /-}"
+  else
+      output_file="${filename// /-}"
+  fi
   output_filename="$folder/$OUTPUT_FOLDER/$output_file"
 
   printf "++ export page %s : %s\n" "$pagenum" "$page"
@@ -259,6 +274,10 @@ while true; do
     ;;
   -F | --folder)
     OUTPUT_FOLDER=$2
+    shift 2
+    ;;
+  --remove-page-suffix)
+    REMOVE_PAGE_SUFFIX=true
     shift 2
     ;;
   --)
