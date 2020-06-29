@@ -6,6 +6,8 @@ Options:
                                     see 'Draw.io CLI Options' section.
   -F, --folder <folder>             Export folder name (default 'export').
   -h, --help                        Display this help message.
+  --remove-page-suffix              Remove page suffix when possible
+                                    (in case of single page file)
 
 Draw.io CLI Options:
   -q, --quality <quality>           Output image quality for JPEG (default: 90).

@@ -17,7 +17,7 @@
 }
 
 @test "Export as png using short options" {
-  docker_test "-E png -C -t -F test-assets-png" "" 0 "png"
+  docker_test "-E png --cli-options -t -F test-assets-png" "" 0 "png"
 }
 
 @test "Export as pdf using long options" {
@@ -26,6 +26,10 @@
 
 @test "Export as adoc using environment variables" {
   docker_test "" "-e DRAWIO_EXPORT_FILEEXT=adoc -e DRAWIO_EXPORT_CLI_OPTIONS=-t -e DRAWIO_EXPORT_FOLDER=test-assets-adoc" 0 "adoc"
+}
+
+@test "Export using remove page suffix flag" {
+  docker_test "--remove-page-suffix --folder test-assets-remove-page-suffix" "" 0 "remove-page-suffix"
 }
 
 docker_test() {

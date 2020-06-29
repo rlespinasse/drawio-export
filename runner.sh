@@ -11,6 +11,8 @@ IFS=$'\n\t'
 #/                                     see 'Draw.io CLI Options' section.
 #/   -F, --folder <folder>             Export folder name (default 'export').
 #/   -h, --help                        Display this help message.
+#/   --remove-page-suffix              Remove page suffix when possible
+#/                                     (in case of single page file)
 #/
 #/ Draw.io CLI Options:
 #/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
@@ -60,12 +62,12 @@ export_drawio_pages() {
 
   local pagenum=0
 
-  local page_suffix=false
+  local page_suffix=true
   if [ "$REMOVE_PAGE_SUFFIX" == "true" ]; then
     local number_of_page=$(sgrep -c '"name=\"".."\""' "$path")
 
-    if [ "$number_of_page" -gt 1 ]; then
-      page_suffix=true
+    if [ "$number_of_page" -eq 1 ]; then
+      page_suffix=false
     fi
   fi
 
@@ -246,9 +248,9 @@ source "$SCRIPT_FOLDER/runner.env"
 EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
-
+REMOVE_PAGE_SUFFIX=false
 set +e
-GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder: --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder:,remove-page-suffix --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -278,7 +280,7 @@ while true; do
     ;;
   --remove-page-suffix)
     REMOVE_PAGE_SUFFIX=true
-    shift 2
+    shift
     ;;
   --)
     shift
