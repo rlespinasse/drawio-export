@@ -28,6 +28,10 @@
   docker_test "" "-e DRAWIO_EXPORT_FILEEXT=adoc -e DRAWIO_EXPORT_CLI_OPTIONS=-t -e DRAWIO_EXPORT_FOLDER=test-assets-adoc" 0 "adoc"
 }
 
+@test "Export using remove page suffix flag" {
+  docker_test "--remove-page-suffix --folder test-assets-remove-page-suffix" "" 0 "remove-page-suffix"
+}
+
 docker_test() {
   run docker run -t $2 -v $(pwd)/tests/data:/data ${DOCKER_IMAGE} $1
 

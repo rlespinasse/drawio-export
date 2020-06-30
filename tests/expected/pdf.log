@@ -37,6 +37,12 @@
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-pdf/file3-Page-2.pdf
++ export file : ./in/single-page.drawio
+++ prepare export folder : ./in/test-assets-pdf
+++ cleanup export content : ./in/test-assets-pdf/single-page*
+++ export page 1 : Page-1
++++ generate pdf file
+./in/single-page.drawio -> ./in/test-assets-pdf/single-page-Page-1.pdf
 + export file : ./in/vscode.drawio
 ++ prepare export folder : ./in/test-assets-pdf
 ++ cleanup export content : ./in/test-assets-pdf/vscode*

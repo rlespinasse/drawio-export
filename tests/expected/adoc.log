@@ -101,6 +101,20 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
++ export file : ./in/single-page.drawio
+++ prepare export folder : ./in/test-assets-adoc
+++ cleanup export content : ./in/test-assets-adoc/single-page*
+++ export page 1 : Page-1
++++ generate png file
+./in/single-page.drawio -> ./in/test-assets-adoc/single-page-Page-1.png
++++ generate adoc file
+./in/test-assets-adoc/single-page-Page-1.adoc
+image 'single-page-Page-1.png'
++++ include links in adoc file
+link text 1 : Some text
+link 1 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
+link 2 : https://github.com/rlespinasse/qanda
 + export file : ./in/vscode.drawio
 ++ prepare export folder : ./in/test-assets-adoc
 ++ cleanup export content : ./in/test-assets-adoc/vscode*
