@@ -17,7 +17,7 @@
 }
 
 @test "Export as png using short options" {
-  docker_test "-E png --cli-options -t -F test-assets-png" "" 0 "png"
+  docker_test "-E png -C -t -F test-assets-png" "" 0 "png"
 }
 
 @test "Export as pdf using long options" {
