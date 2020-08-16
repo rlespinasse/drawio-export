@@ -59,25 +59,33 @@ on:
       - master
     paths:
       - "**.drawio"
-      - .github/workflows/drawio-export.yaml
+      - .github/workflows/drawio-export.yml
 jobs:
   drawio-export:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Export drawio files to asciidoctor and png files
-        uses: docker://rlespinasse/drawio-export@<VERSION>
+        uses: docker://rlespinasse/drawio-export:<VERSION>
         env:
           DRAWIO_EXPORT_FILEEXT: adoc
-          DRAWIO_EXPORT_CLI_OPTIONS: -t
-          DRAWIO_EXPORT_FOLDER: assets
+          DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS: -t
+          DRAWIO_EXPORT_FOLDER: drawio-assets
+
+      - name: Get author and committer info from HEAD commit
+        uses: rlespinasse/git-commit-data-action@v1.x
 
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           commit_message: "docs: sync draw.io exported files"
+          commit_user_name: "${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+          commit_user_email: "${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
+          commit_author: "${{ env.GIT_COMMIT_AUTHOR }}"
 ----
 ====
 
