@@ -1,5 +1,8 @@
 = Draw.io Export
 
+image:https://img.shields.io/docker/v/rlespinasse/drawio-export?style=for-the-badge[Docker Version,link=https://hub.docker.com/r/rlespinasse/drawio-export]
+image:https://img.shields.io/docker/pulls/rlespinasse/drawio-export?style=for-the-badge[Docker Pull,link=https://hub.docker.com/r/rlespinasse/drawio-export]
+
 Export Draw.io diagrams using command line / docker
 
 == Supported Export formats
