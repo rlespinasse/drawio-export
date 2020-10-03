@@ -4,7 +4,7 @@ on:
     types: [published]
   push:
     branches:
-      - master
+      - v3.x
     paths:
       - DOCKER.md
       - .github/workflows/dockerhub.yaml
