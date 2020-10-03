@@ -8,11 +8,12 @@ Export Draw.io diagrams using command line / docker
 == Supported Export formats
 
 * **draw.io** export formats
+** jpg
 ** pdf
 ** png
-** jpg
 ** svg
 ** vsdx
+** xml
 * **drawio-export** additional formats
 ** adoc - Export in png and create an additional asciidoc file (with support external links).
 

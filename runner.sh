@@ -6,7 +6,7 @@ IFS=$'\n\t'
 #/ Usage: drawio-export [Options]
 #/ Options:
 #/   -E, --fileext <fileext>           Extension of exported files (default 'pdf').
-#/                                     pdf, png, jpg, svg, vsdx, adoc
+#/                                     adoc, jpg, pdf, png, svg, vsdx, xml
 #/   -F, --folder <folder>             Export folder name (default 'export').
 #/   -h, --help                        Display this help message.
 #/   --remove-page-suffix              Remove page suffix when possible
@@ -18,6 +18,7 @@ IFS=$'\n\t'
 #/   -e, --embed-diagram               Includes a copy of the diagram (for PNG format only).
 #/   -b, --border <border>             Sets the border width around the diagram (default: 0).
 #/   -s, --scale <scale>               Scales the diagram size.
+#/   -u, --uncompressed                Uncompressed XML output (for XML format only).
 #/   --width <width>                   Fits the generated image/pdf into the specified width, preserves aspect ratio.
 #/   --height <height>                 Fits the generated image/pdf into the specified height, preserves aspect ratio.
 #/   --crop                            Crops PDF to diagram size.
@@ -256,7 +257,7 @@ REMOVE_PAGE_SUFFIX=false
 CLI_OPTIONS_ARRAY=()
 
 set +e
-GETOPT=$(getopt -o hE:F:q:teb:s:C: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,height:,width:,crop,remove-page-suffix,cli-options: --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,cli-options: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -313,6 +314,11 @@ while true; do
     CLI_OPTIONS_ARRAY+=("-s")
     CLI_OPTIONS_ARRAY+=("$2")
     shift 2
+    ;;
+  -u | --uncompressed)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-u")
+    shift
     ;;
   --width)
     CLI_OPTIONS=""
