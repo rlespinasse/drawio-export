@@ -17,11 +17,11 @@
 }
 
 @test "Export as png using short options" {
-  docker_test "-E png -C -t -F test-assets-png" "" 0 "png"
+  docker_test "-E png -t -F test-assets-png" "" 0 "png"
 }
 
 @test "Export as pdf using long options" {
-  docker_test "--fileext pdf --cli-options --crop --folder test-assets-pdf" "" 0 "pdf"
+  docker_test "--fileext pdf --crop --folder test-assets-pdf" "" 0 "pdf"
 }
 
 @test "Export as adoc using environment variables" {
