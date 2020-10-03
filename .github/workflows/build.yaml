@@ -1,5 +1,9 @@
 name: Build
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - v3.x
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
@@ -26,7 +30,6 @@ jobs:
           semantic_version: 17.1.2
           branches: |
             [
-              'v2.x',
               'v3.x'
             ]
           extra_plugins: |
