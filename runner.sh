@@ -122,13 +122,13 @@ export_diagram_file() {
   # shellcheck disable=SC2086
   DRAWIO_CLI_SUPPRESS_WARNINGS=true \
     "$SCRIPT_FOLDER/cli-runner.sh" \
-    --disable-dev-shm-usage \
     -x \
     -f "$export_type" \
     $CLI_OPTIONS \
     -p "$((pagenum - 1))" \
     -o "$output_filename.$export_type" \
-    "$path"
+    "$path" \
+    --disable-dev-shm-usage 
 }
 
 create_asciidoc_page() {
