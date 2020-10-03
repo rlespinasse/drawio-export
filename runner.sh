@@ -7,14 +7,12 @@ IFS=$'\n\t'
 #/ Options:
 #/   -E, --fileext <fileext>           Extension of exported files (default 'pdf').
 #/                                     pdf, png, jpg, svg, vsdx, adoc
-#/   -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
-#/                                     see 'Draw.io CLI Options' section.
 #/   -F, --folder <folder>             Export folder name (default 'export').
 #/   -h, --help                        Display this help message.
 #/   --remove-page-suffix              Remove page suffix when possible
 #/                                     (in case of single page file)
 #/
-#/ Draw.io CLI Options:
+#/ Also support Draw.io CLI Options:
 #/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
 #/   -t, --transparent                 Set transparent background for PNG.
 #/   -e, --embed-diagram               Includes a copy of the diagram (for PNG format only).
@@ -26,8 +24,13 @@ IFS=$'\n\t'
 #/
 #/ Environment variables:
 #/   DRAWIO_EXPORT_FILEEXT             Same as '--fileext', will be override if '--fileext' is set.
-#/   DRAWIO_EXPORT_CLI_OPTIONS         Same as '--cli-options', will be override if '--cli-options' is set.
+#/   DRAWIO_EXPORT_CLI_OPTIONS         Options for Draw.io CLI (default '--crop'), will be override if any CLI option is set.
 #/   DRAWIO_EXPORT_FOLDER              Same as '--export-folder', will be override if '--export-folder' is set.
+#/
+#/ Deprecated Options:
+#/   -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
+#/                                     see 'Draw.io CLI Options' section.
+#/                                     DEPRECATED: only support one argument.
 usage() {
   grep '^#/' "$0" | cut -c4-
 }
@@ -93,9 +96,9 @@ export_drawio_page() {
   local output_file
   local output_filename
   if [ "$page_suffix" == "true" ]; then
-  output_file="${filename// /-}-${page// /-}"
+    output_file="${filename// /-}-${page// /-}"
   else
-      output_file="${filename// /-}"
+    output_file="${filename// /-}"
   fi
   output_filename="$folder/$OUTPUT_FOLDER/$output_file"
 
@@ -124,11 +127,12 @@ export_diagram_file() {
     "$SCRIPT_FOLDER/cli-runner.sh" \
     -x \
     -f "$export_type" \
+    "${CLI_OPTIONS_ARRAY[*]}" \
     $CLI_OPTIONS \
     -p "$((pagenum - 1))" \
     -o "$output_filename.$export_type" \
     "$path" \
-    --disable-dev-shm-usage 
+    --disable-dev-shm-usage
 }
 
 create_asciidoc_page() {
@@ -249,8 +253,10 @@ EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
 REMOVE_PAGE_SUFFIX=false
+CLI_OPTIONS_ARRAY=()
+
 set +e
-GETOPT=$(getopt -o hE:C:F: -l help,fileext:,cli-options:,folder:,remove-page-suffix --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hE:F:q:teb:s:C: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,height:,width:,crop,remove-page-suffix,cli-options: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -262,16 +268,13 @@ set -e
 eval set -- "$GETOPT"
 while true; do
   case "$1" in
+  # Draw.io Export options
   -h | --help)
     usage
     exit 0
     ;;
   -E | --fileext)
     EXPORT_TYPE=$2
-    shift 2
-    ;;
-  -C | --cli-options)
-    CLI_OPTIONS=$2
     shift 2
     ;;
   -F | --folder)
@@ -282,6 +285,58 @@ while true; do
     REMOVE_PAGE_SUFFIX=true
     shift
     ;;
+  # Draw.io CLI options
+  -q | --quality)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-q")
+    CLI_OPTIONS_ARRAY+=("$2")
+    shift 2
+    ;;
+  -t | --transparent)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-t")
+    shift
+    ;;
+  -e | --embed-diagram)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-e")
+    shift
+    ;;
+  -b | --border)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-b")
+    CLI_OPTIONS_ARRAY+=("$2")
+    shift 2
+    ;;
+  -s | --scale)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("-s")
+    CLI_OPTIONS_ARRAY+=("$2")
+    shift 2
+    ;;
+  --width)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("--width")
+    CLI_OPTIONS_ARRAY+=("$2")
+    shift 2
+    ;;
+  --height)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("--height")
+    CLI_OPTIONS_ARRAY+=("$2")
+    shift 2
+    ;;
+  --crop)
+    CLI_OPTIONS=""
+    CLI_OPTIONS_ARRAY+=("--crop")
+    shift
+    ;;
+  # Deprecated options
+  -C | --cli-options)
+    CLI_OPTIONS=$2
+    shift 2
+    ;;
+  # Others
   --)
     shift
     break
