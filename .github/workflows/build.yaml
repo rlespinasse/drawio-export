@@ -13,7 +13,7 @@ jobs:
       # Setup
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - uses: rlespinasse/github-slug-action@v2.x
+      - uses: rlespinasse/github-slug-action@v3.x
 
       # Build and test
       - name: Build docker image
@@ -28,10 +28,11 @@ jobs:
       # Release
       - uses: cycjimmy/semantic-release-action@v2
         with:
-          semantic_version: 17.0.7
+          semantic_version: 17.1.2
           branches: |
             [
-              'v2.x'
+              'v2.x',
+              'v3.x'
             ]
           extra_plugins: |
             @semantic-release/changelog@5.0.1
