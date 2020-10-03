@@ -28,6 +28,14 @@
   docker_test "" "-e DRAWIO_EXPORT_FILEEXT=adoc -e DRAWIO_EXPORT_CLI_OPTIONS=-t -e DRAWIO_EXPORT_FOLDER=test-assets-adoc" 0 "adoc"
 }
 
+@test "Export as xml using short options" {
+  docker_test "-E xml -u -F test-assets-xml" "" 0 "xml"
+}
+
+@test "Export as xml using long options" {
+  docker_test "-E xml --uncompressed -F test-assets-xml" "" 0 "xml"
+}
+
 @test "Export using remove page suffix flag" {
   docker_test "--remove-page-suffix --folder test-assets-remove-page-suffix" "" 0 "remove-page-suffix"
 }
