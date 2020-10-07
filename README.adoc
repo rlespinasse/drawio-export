@@ -77,7 +77,7 @@ jobs:
         uses: docker://rlespinasse/drawio-export:<VERSION>
         env:
           DRAWIO_EXPORT_FILEEXT: adoc
-          DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS: -t
+          DRAWIO_EXPORT_CLI_OPTIONS: -t
           DRAWIO_EXPORT_FOLDER: drawio-assets
 
       - name: Get author and committer info from HEAD commit
