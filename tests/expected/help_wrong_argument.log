@@ -7,6 +7,7 @@ Options:
   -F, --folder <folder>             Export folder name (default 'export').
   -h, --help                        Display this help message.
   --remove-page-suffix              Remove page suffix when possible
+  --on-changes                      Export drawio file only if he's newer than exported files
                                     (in case of single page file)
 
 Also support Draw.io CLI Options:
