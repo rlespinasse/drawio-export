@@ -67,12 +67,8 @@ export_drawio_pages() {
   local pagenum=0
 
   local page_suffix=true
-  if [ "$REMOVE_PAGE_SUFFIX" == "true" ]; then
-    local number_of_page=$(sgrep -c '"name=\"".."\""' "$path")
-
-    if [ "$number_of_page" -eq 1 ]; then
-      page_suffix=false
-    fi
+  if [ "$REMOVE_PAGE_SUFFIX" == "true" ] && [ "$(sgrep -c '"name=\"".."\""' "$path")" -eq 1 ]; then
+    page_suffix=false
   fi
 
   while read -r page; do
