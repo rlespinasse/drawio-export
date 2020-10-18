@@ -14,6 +14,14 @@ jobs:
       - uses: actions/setup-node@v1
       - uses: rlespinasse/github-slug-action@v3.x
 
+      # Linter
+      - name: Lint Code Base
+        uses: github/super-linter@v3
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: v3.x
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # Build and test
       - name: Build docker image
         run: make build
