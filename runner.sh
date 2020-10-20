@@ -10,8 +10,8 @@ IFS=$'\n\t'
 #/   -F, --folder <folder>             Export folder name (default 'export').
 #/   -h, --help                        Display this help message.
 #/   --remove-page-suffix              Remove page suffix when possible
-#/   --on-changes                      Export drawio file only if he's newer than exported files
 #/                                     (in case of single page file)
+#/   --on-changes                      Export drawio files only if it's newer than exported files
 #/
 #/ Also support Draw.io CLI Options:
 #/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
@@ -110,7 +110,7 @@ export_drawio_page() {
     should_retry=true
   fi
 
-  if [ "$should_retry" == "false" -a "$ON_CHANGES" == "true" ]; then
+  if [ "$should_retry" == "false" ] && [ "$ON_CHANGES" == "true" ]; then
     printf "++ page %s is already exported (skip this file)\n" "$pagenum"
   else
     printf "++ export page %s : %s\n" "$pagenum" "$page"
