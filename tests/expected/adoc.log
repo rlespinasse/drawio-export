@@ -3,7 +3,6 @@
 ++ cleanup export content : ./empty_in/test-assets-adoc/empty*
 + export file : ./in/file1.drawio
 ++ prepare export folder : ./in/test-assets-adoc
-++ cleanup export content : ./in/test-assets-adoc/file1*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/file1.drawio -> ./in/test-assets-adoc/file1-Page-1.png
@@ -26,9 +25,9 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/test-assets-adoc/file1*
 + export file : ./in/folder1/file2.1.drawio
 ++ prepare export folder : ./in/folder1/test-assets-adoc
-++ cleanup export content : ./in/folder1/test-assets-adoc/file2.1*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-adoc/file2.1-Page-1.png
@@ -51,9 +50,9 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/folder1/test-assets-adoc/file2.1*
 + export file : ./in/folder1/file2.2.drawio
 ++ prepare export folder : ./in/folder1/test-assets-adoc
-++ cleanup export content : ./in/folder1/test-assets-adoc/file2.2*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-adoc/file2.2-Page-1.png
@@ -76,9 +75,9 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/folder1/test-assets-adoc/file2.2*
 + export file : ./in/folder2/folder3/file3.drawio
 ++ prepare export folder : ./in/folder2/folder3/test-assets-adoc
-++ cleanup export content : ./in/folder2/folder3/test-assets-adoc/file3*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-adoc/file3-Page-1.png
@@ -101,9 +100,9 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/folder2/folder3/test-assets-adoc/file3*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-adoc
-++ cleanup export content : ./in/test-assets-adoc/single-page*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/single-page.drawio -> ./in/test-assets-adoc/single-page-Page-1.png
@@ -115,9 +114,9 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/test-assets-adoc/single-page*
 + export file : ./in/vscode.drawio
 ++ prepare export folder : ./in/test-assets-adoc
-++ cleanup export content : ./in/test-assets-adoc/vscode*
 ++ export page 1 : Page-1
 +++ generate png file
 ./in/vscode.drawio -> ./in/test-assets-adoc/vscode-Page-1.png
@@ -140,3 +139,4 @@ link text 1 : Some text
 link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./in/test-assets-adoc/vscode*

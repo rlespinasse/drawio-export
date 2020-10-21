@@ -6,6 +6,7 @@ Options:
   -h, --help                        Display this help message.
   --remove-page-suffix              Remove page suffix when possible
                                     (in case of single page file)
+  --on-changes                      Export drawio files only if it's newer than exported files
 
 Also support Draw.io CLI Options:
   -q, --quality <quality>           Output image quality for JPEG (default: 90).

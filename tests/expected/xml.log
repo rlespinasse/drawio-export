@@ -3,52 +3,52 @@
 ++ cleanup export content : ./empty_in/test-assets-xml/empty*
 + export file : ./in/file1.drawio
 ++ prepare export folder : ./in/test-assets-xml
-++ cleanup export content : ./in/test-assets-xml/file1*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/file1.drawio -> ./in/test-assets-xml/file1-Page-1.xml
 ++ export page 2 : Page 2
 +++ generate xml file
 ./in/file1.drawio -> ./in/test-assets-xml/file1-Page-2.xml
+++ cleanup export content : ./in/test-assets-xml/file1*
 + export file : ./in/folder1/file2.1.drawio
 ++ prepare export folder : ./in/folder1/test-assets-xml
-++ cleanup export content : ./in/folder1/test-assets-xml/file2.1*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-xml/file2.1-Page-1.xml
 ++ export page 2 : Page 2
 +++ generate xml file
 ./in/folder1/file2.1.drawio -> ./in/folder1/test-assets-xml/file2.1-Page-2.xml
+++ cleanup export content : ./in/folder1/test-assets-xml/file2.1*
 + export file : ./in/folder1/file2.2.drawio
 ++ prepare export folder : ./in/folder1/test-assets-xml
-++ cleanup export content : ./in/folder1/test-assets-xml/file2.2*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-xml/file2.2-Page-1.xml
 ++ export page 2 : Page 2
 +++ generate xml file
 ./in/folder1/file2.2.drawio -> ./in/folder1/test-assets-xml/file2.2-Page-2.xml
+++ cleanup export content : ./in/folder1/test-assets-xml/file2.2*
 + export file : ./in/folder2/folder3/file3.drawio
 ++ prepare export folder : ./in/folder2/folder3/test-assets-xml
-++ cleanup export content : ./in/folder2/folder3/test-assets-xml/file3*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-xml/file3-Page-1.xml
 ++ export page 2 : Page 2
 +++ generate xml file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-xml/file3-Page-2.xml
+++ cleanup export content : ./in/folder2/folder3/test-assets-xml/file3*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-xml
-++ cleanup export content : ./in/test-assets-xml/single-page*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/single-page.drawio -> ./in/test-assets-xml/single-page-Page-1.xml
+++ cleanup export content : ./in/test-assets-xml/single-page*
 + export file : ./in/vscode.drawio
 ++ prepare export folder : ./in/test-assets-xml
-++ cleanup export content : ./in/test-assets-xml/vscode*
 ++ export page 1 : Page-1
 +++ generate xml file
 ./in/vscode.drawio -> ./in/test-assets-xml/vscode-Page-1.xml
 ++ export page 2 : Page-2
 +++ generate xml file
 ./in/vscode.drawio -> ./in/test-assets-xml/vscode-Page-2.xml
+++ cleanup export content : ./in/test-assets-xml/vscode*

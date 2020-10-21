@@ -11,6 +11,7 @@ IFS=$'\n\t'
 #/   -h, --help                        Display this help message.
 #/   --remove-page-suffix              Remove page suffix when possible
 #/                                     (in case of single page file)
+#/   --on-changes                      Export drawio files only if it's newer than exported files
 #/
 #/ Also support Draw.io CLI Options:
 #/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
@@ -52,10 +53,11 @@ export_drawio_files() {
     echo "++ prepare export folder : $folder/$OUTPUT_FOLDER"
     mkdir -p "$folder/$OUTPUT_FOLDER"
 
-    echo "++ cleanup export content : $folder/$OUTPUT_FOLDER/${filename}*"
-    find "$folder/$OUTPUT_FOLDER" -type f -name "${filename}*" -delete
-
     export_drawio_pages "$path" "$folder" "$filename"
+
+    echo "++ cleanup export content : $folder/$OUTPUT_FOLDER/${filename}*"
+    find "$folder/$OUTPUT_FOLDER" -type f -name "${filename}*" -not -newer "$path" -delete
+
   done < <(find . -name "*.drawio" | sort)
 }
 
@@ -99,17 +101,26 @@ export_drawio_page() {
   fi
   output_filename="$folder/$OUTPUT_FOLDER/$output_file"
 
-  printf "++ export page %s : %s\n" "$pagenum" "$page"
-  printf "+++ generate %s file\n" "$export_type"
-  export_diagram_file "$export_type" "$path" "$pagenum" "$output_filename"
+  local should_retry=false
+  if [ "$path" -nt "$output_filename.$export_type" ]; then
+    should_retry=true
+  fi
 
-  if [ "$EXPORT_TYPE" == "adoc" ]; then
-    echo "+++ generate adoc file"
-    create_asciidoc_page "$path" "$filename" "$page" "$output_filename" "$output_file"
-    echo "image '$output_file.png'"
+  if [ "$should_retry" == "false" ] && [ "$ON_CHANGES" == "true" ]; then
+    printf "++ page %s is already exported (skip this file)\n" "$pagenum"
+  else
+    printf "++ export page %s : %s\n" "$pagenum" "$page"
+    printf "+++ generate %s file\n" "$export_type"
+    export_diagram_file "$export_type" "$path" "$pagenum" "$output_filename"
 
-    echo "+++ include links in adoc file"
-    include_links_in_asciidoc_page "$path" "$page" "$output_filename"
+    if [ "$EXPORT_TYPE" == "adoc" ]; then
+      echo "+++ generate adoc file"
+      create_asciidoc_page "$path" "$filename" "$page" "$output_filename" "$output_file"
+      echo "image '$output_file.png'"
+
+      echo "+++ include links in adoc file"
+      include_links_in_asciidoc_page "$path" "$page" "$output_filename"
+    fi
   fi
 }
 
@@ -250,10 +261,11 @@ EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
 REMOVE_PAGE_SUFFIX=false
+ON_CHANGES=false
 CLI_OPTIONS_ARRAY=()
 
 set +e
-GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,cli-options: --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,on-changes,cli-options: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -280,6 +292,10 @@ while true; do
     ;;
   --remove-page-suffix)
     REMOVE_PAGE_SUFFIX=true
+    shift
+    ;;
+  --on-changes)
+    ON_CHANGES=true
     shift
     ;;
   # Draw.io CLI options

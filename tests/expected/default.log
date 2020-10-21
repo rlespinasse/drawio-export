@@ -3,52 +3,52 @@
 ++ cleanup export content : ./empty_in/export/empty*
 + export file : ./in/file1.drawio
 ++ prepare export folder : ./in/export
-++ cleanup export content : ./in/export/file1*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/file1.drawio -> ./in/export/file1-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./in/file1.drawio -> ./in/export/file1-Page-2.pdf
+++ cleanup export content : ./in/export/file1*
 + export file : ./in/folder1/file2.1.drawio
 ++ prepare export folder : ./in/folder1/export
-++ cleanup export content : ./in/folder1/export/file2.1*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./in/folder1/file2.1.drawio -> ./in/folder1/export/file2.1-Page-2.pdf
+++ cleanup export content : ./in/folder1/export/file2.1*
 + export file : ./in/folder1/file2.2.drawio
 ++ prepare export folder : ./in/folder1/export
-++ cleanup export content : ./in/folder1/export/file2.2*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./in/folder1/file2.2.drawio -> ./in/folder1/export/file2.2-Page-2.pdf
+++ cleanup export content : ./in/folder1/export/file2.2*
 + export file : ./in/folder2/folder3/file3.drawio
 ++ prepare export folder : ./in/folder2/folder3/export
-++ cleanup export content : ./in/folder2/folder3/export/file3*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-2.pdf
+++ cleanup export content : ./in/folder2/folder3/export/file3*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/export
-++ cleanup export content : ./in/export/single-page*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/single-page.drawio -> ./in/export/single-page-Page-1.pdf
+++ cleanup export content : ./in/export/single-page*
 + export file : ./in/vscode.drawio
 ++ prepare export folder : ./in/export
-++ cleanup export content : ./in/export/vscode*
 ++ export page 1 : Page-1
 +++ generate pdf file
 ./in/vscode.drawio -> ./in/export/vscode-Page-1.pdf
 ++ export page 2 : Page-2
 +++ generate pdf file
 ./in/vscode.drawio -> ./in/export/vscode-Page-2.pdf
+++ cleanup export content : ./in/export/vscode*

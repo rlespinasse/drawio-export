@@ -40,6 +40,11 @@
   docker_test "--remove-page-suffix --folder test-assets-remove-page-suffix" "" 0 "remove-page-suffix"
 }
 
+@test "Export using on changes flag" {
+  docker_test "--on-changes --folder test-assets-on-changes" "" 0 "on-changes"
+  docker_test "--on-changes --folder test-assets-on-changes" "" 0 "on-changes-not-changed"
+}
+
 docker_test() {
   run docker run -t $2 -v $(pwd)/tests/data:/data ${DOCKER_IMAGE} $1
 
