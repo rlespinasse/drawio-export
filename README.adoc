@@ -1,7 +1,7 @@
 = Draw.io Export
 
-image:https://img.shields.io/docker/v/rlespinasse/drawio-export?style=for-the-badge[Docker Version,link=https://hub.docker.com/r/rlespinasse/drawio-export]
-image:https://img.shields.io/docker/pulls/rlespinasse/drawio-export?style=for-the-badge[Docker Pull,link=https://hub.docker.com/r/rlespinasse/drawio-export]
+image:https://img.shields.io/docker/v/rlespinasse/drawio-export[Docker Version,link=https://hub.docker.com/r/rlespinasse/drawio-export]
+image:https://img.shields.io/docker/pulls/rlespinasse/drawio-export[Docker Pull,link=https://hub.docker.com/r/rlespinasse/drawio-export]
 image:https://github.com/rlespinasse/drawio-export/workflows/Build/badge.svg[Build]
 
 Export Draw.io diagrams using command line / docker
