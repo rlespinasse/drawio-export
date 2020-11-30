@@ -77,7 +77,7 @@ jobs:
       - name: Export drawio files to asciidoctor and png files
         uses: docker://rlespinasse/drawio-export:<VERSION>
         with:
-          args: --fileext adoc --folder drawio-assets --transparent --on-changes
+          args: --fileext adoc --folder drawio-assets --transparent
 
       - name: Get author and committer info from HEAD commit
         uses: rlespinasse/git-commit-data-action@v1.x
