@@ -37,6 +37,21 @@
 +++ generate xml file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-xml/file3-Page-2.xml
 ++ cleanup export content : ./in/folder2/folder3/test-assets-xml/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/test-assets-xml
+++ export page 1 : AWS
++++ generate xml file
+./in/shapes.drawio -> ./in/test-assets-xml/shapes-AWS.xml
+++ export page 2 : Azure
++++ generate xml file
+./in/shapes.drawio -> ./in/test-assets-xml/shapes-Azure.xml
+++ export page 3 : GCP
++++ generate xml file
+./in/shapes.drawio -> ./in/test-assets-xml/shapes-GCP.xml
+++ export page 4 : K8S
++++ generate xml file
+./in/shapes.drawio -> ./in/test-assets-xml/shapes-K8S.xml
+++ cleanup export content : ./in/test-assets-xml/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-xml
 ++ export page 1 : Page-1

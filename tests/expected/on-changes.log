@@ -37,6 +37,21 @@
 +++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-on-changes/file3-Page-2.pdf
 ++ cleanup export content : ./in/folder2/folder3/test-assets-on-changes/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/test-assets-on-changes
+++ export page 1 : AWS
++++ generate pdf file
+./in/shapes.drawio -> ./in/test-assets-on-changes/shapes-AWS.pdf
+++ export page 2 : Azure
++++ generate pdf file
+./in/shapes.drawio -> ./in/test-assets-on-changes/shapes-Azure.pdf
+++ export page 3 : GCP
++++ generate pdf file
+./in/shapes.drawio -> ./in/test-assets-on-changes/shapes-GCP.pdf
+++ export page 4 : K8S
++++ generate pdf file
+./in/shapes.drawio -> ./in/test-assets-on-changes/shapes-K8S.pdf
+++ cleanup export content : ./in/test-assets-on-changes/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-on-changes
 ++ export page 1 : Page-1

@@ -21,6 +21,13 @@
 ++ page 1 is already exported (skip this file)
 ++ page 2 is already exported (skip this file)
 ++ cleanup export content : ./in/folder2/folder3/test-assets-on-changes/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/test-assets-on-changes
+++ page 1 is already exported (skip this file)
+++ page 2 is already exported (skip this file)
+++ page 3 is already exported (skip this file)
+++ page 4 is already exported (skip this file)
+++ cleanup export content : ./in/test-assets-on-changes/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-on-changes
 ++ page 1 is already exported (skip this file)

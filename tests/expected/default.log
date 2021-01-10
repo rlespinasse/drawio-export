@@ -37,6 +37,21 @@
 +++ generate pdf file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/export/file3-Page-2.pdf
 ++ cleanup export content : ./in/folder2/folder3/export/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/export
+++ export page 1 : AWS
++++ generate pdf file
+./in/shapes.drawio -> ./in/export/shapes-AWS.pdf
+++ export page 2 : Azure
++++ generate pdf file
+./in/shapes.drawio -> ./in/export/shapes-Azure.pdf
+++ export page 3 : GCP
++++ generate pdf file
+./in/shapes.drawio -> ./in/export/shapes-GCP.pdf
+++ export page 4 : K8S
++++ generate pdf file
+./in/shapes.drawio -> ./in/export/shapes-K8S.pdf
+++ cleanup export content : ./in/export/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/export
 ++ export page 1 : Page-1
