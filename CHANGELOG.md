@@ -1,3 +1,10 @@
+## [3.3.1](http://github.com/rlespinasse/drawio-export/compare/3.3.0...3.3.1) (2021-01-10)
+
+
+### Bug Fixes
+
+* support azure shape ([58caaec](http://github.com/rlespinasse/drawio-export/commit/58caaec4e8feddf7138559257109159e8bb74839))
+
 # [3.3.0](http://github.com/rlespinasse/drawio-export/compare/3.2.1...3.3.0) (2020-10-21)
 
 
