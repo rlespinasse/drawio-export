@@ -37,6 +37,21 @@
 +++ generate png file
 ./in/folder2/folder3/file3.drawio -> ./in/folder2/folder3/test-assets-png/file3-Page-2.png
 ++ cleanup export content : ./in/folder2/folder3/test-assets-png/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/test-assets-png
+++ export page 1 : AWS
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-png/shapes-AWS.png
+++ export page 2 : Azure
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-png/shapes-Azure.png
+++ export page 3 : GCP
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-png/shapes-GCP.png
+++ export page 4 : K8S
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-png/shapes-K8S.png
+++ cleanup export content : ./in/test-assets-png/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-png
 ++ export page 1 : Page-1

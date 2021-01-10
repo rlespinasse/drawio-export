@@ -101,6 +101,37 @@ link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ cleanup export content : ./in/folder2/folder3/test-assets-adoc/file3*
++ export file : ./in/shapes.drawio
+++ prepare export folder : ./in/test-assets-adoc
+++ export page 1 : AWS
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-adoc/shapes-AWS.png
++++ generate adoc file
+./in/test-assets-adoc/shapes-AWS.adoc
+image 'shapes-AWS.png'
++++ include links in adoc file
+++ export page 2 : Azure
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-adoc/shapes-Azure.png
++++ generate adoc file
+./in/test-assets-adoc/shapes-Azure.adoc
+image 'shapes-Azure.png'
++++ include links in adoc file
+++ export page 3 : GCP
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-adoc/shapes-GCP.png
++++ generate adoc file
+./in/test-assets-adoc/shapes-GCP.adoc
+image 'shapes-GCP.png'
++++ include links in adoc file
+++ export page 4 : K8S
++++ generate png file
+./in/shapes.drawio -> ./in/test-assets-adoc/shapes-K8S.png
++++ generate adoc file
+./in/test-assets-adoc/shapes-K8S.adoc
+image 'shapes-K8S.png'
++++ include links in adoc file
+++ cleanup export content : ./in/test-assets-adoc/shapes*
 + export file : ./in/single-page.drawio
 ++ prepare export folder : ./in/test-assets-adoc
 ++ export page 1 : Page-1
