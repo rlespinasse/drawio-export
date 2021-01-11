@@ -1,4 +1,4 @@
-FROM rlespinasse/drawio-cli:3.1.0
+FROM rlespinasse/drawio-cli:3.1.1
 
 # keep runner.sh from drawio-cli base image
 RUN mv runner.sh cli-runner.sh

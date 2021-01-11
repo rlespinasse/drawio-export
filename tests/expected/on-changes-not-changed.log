@@ -37,3 +37,8 @@
 ++ page 1 is already exported (skip this file)
 ++ page 2 is already exported (skip this file)
 ++ cleanup export content : ./in/test-assets-on-changes/vscode*
++ export file : ./space/file 2.drawio
+++ prepare export folder : ./space/test-assets-on-changes
+++ page 1 is already exported (skip this file)
+++ page 2 is already exported (skip this file)
+++ cleanup export content : ./space/test-assets-on-changes/file 2*

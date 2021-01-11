@@ -149,7 +149,7 @@ export_diagram_file() {
     "$SCRIPT_FOLDER/cli-runner.sh" \
     -x \
     -f "$export_type" \
-    "${CLI_OPTIONS_ARRAY[*]}" \
+    "${CLI_OPTIONS_ARRAY[@]}" \
     $CLI_OPTIONS \
     -p "$((pagenum - 1))" \
     -o "$output_filename.$export_type" \
