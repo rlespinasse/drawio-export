@@ -171,3 +171,28 @@ link 1 : https://github.com/rlespinasse/qanda
 link text 2 : Some link
 link 2 : https://github.com/rlespinasse/qanda
 ++ cleanup export content : ./in/test-assets-adoc/vscode*
++ export file : ./space/file 2.drawio
+++ prepare export folder : ./space/test-assets-adoc
+++ export page 1 : Page-1
++++ generate png file
+./space/file 2.drawio -> ./space/test-assets-adoc/file-2-Page-1.png
++++ generate adoc file
+./space/test-assets-adoc/file-2-Page-1.adoc
+image 'file-2-Page-1.png'
++++ include links in adoc file
+link text 1 : Some text
+link 1 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
+link 2 : https://github.com/rlespinasse/qanda
+++ export page 2 : Page 2
++++ generate png file
+./space/file 2.drawio -> ./space/test-assets-adoc/file-2-Page-2.png
++++ generate adoc file
+./space/test-assets-adoc/file-2-Page-2.adoc
+image 'file-2-Page-2.png'
++++ include links in adoc file
+link text 1 : Some text
+link 1 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
+link 2 : https://github.com/rlespinasse/qanda
+++ cleanup export content : ./space/test-assets-adoc/file 2*

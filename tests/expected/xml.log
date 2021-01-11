@@ -67,3 +67,12 @@
 +++ generate xml file
 ./in/vscode.drawio -> ./in/test-assets-xml/vscode-Page-2.xml
 ++ cleanup export content : ./in/test-assets-xml/vscode*
++ export file : ./space/file 2.drawio
+++ prepare export folder : ./space/test-assets-xml
+++ export page 1 : Page-1
++++ generate xml file
+./space/file 2.drawio -> ./space/test-assets-xml/file-2-Page-1.xml
+++ export page 2 : Page 2
++++ generate xml file
+./space/file 2.drawio -> ./space/test-assets-xml/file-2-Page-2.xml
+++ cleanup export content : ./space/test-assets-xml/file 2*

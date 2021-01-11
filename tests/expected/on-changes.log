@@ -67,3 +67,12 @@
 +++ generate pdf file
 ./in/vscode.drawio -> ./in/test-assets-on-changes/vscode-Page-2.pdf
 ++ cleanup export content : ./in/test-assets-on-changes/vscode*
++ export file : ./space/file 2.drawio
+++ prepare export folder : ./space/test-assets-on-changes
+++ export page 1 : Page-1
++++ generate pdf file
+./space/file 2.drawio -> ./space/test-assets-on-changes/file-2-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+./space/file 2.drawio -> ./space/test-assets-on-changes/file-2-Page-2.pdf
+++ cleanup export content : ./space/test-assets-on-changes/file 2*
