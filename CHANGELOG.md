@@ -1,3 +1,10 @@
+## [3.3.2](http://github.com/rlespinasse/drawio-export/compare/3.3.1...3.3.2) (2021-01-11)
+
+
+### Bug Fixes
+
+* manage filename with space ([2f52f5a](http://github.com/rlespinasse/drawio-export/commit/2f52f5af8f277fbe7dd15666d00a7c3a5c652e68))
+
 ## [3.3.1](http://github.com/rlespinasse/drawio-export/compare/3.3.0...3.3.1) (2021-01-10)
 
 
