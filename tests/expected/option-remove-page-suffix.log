@@ -1,0 +1,4 @@
++ export file : ./single-page.drawio
+++ export page 1 : Page-1
++++ generate pdf file
+./single-page.drawio -> ./test-assets-remove-page-suffix/single-page.pdf

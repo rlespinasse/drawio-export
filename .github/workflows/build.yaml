@@ -11,26 +11,27 @@ jobs:
     steps:
       # Setup
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v1
       - uses: rlespinasse/github-slug-action@v3.x
-
-      # Linter
-      - name: Lint Code Base
-        uses: github/super-linter@v3
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: v3.x
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and test
       - name: Build docker image
         run: make build
         env:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
-      - name: Test docker image
+      - name: Test docker image // Run
+        id: test-docker-image
         run: make setup-test test
         env:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
+      - name: Test docker image // Store output logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-docker-image-logs
+          path: "tests/output/*.log"
+        if: ${{ failure() }}
 
       # Release
       - uses: cycjimmy/semantic-release-action@v2

@@ -1,5 +1,3 @@
-draw-export: unrecognized option '--wrong-argument'
-Failed to parse options...exiting.
 Usage: drawio-export [Options]
 Options:
   -E, --fileext <fileext>           Extension of exported files (default 'pdf').
@@ -9,6 +7,9 @@ Options:
   --remove-page-suffix              Remove page suffix when possible
                                     (in case of single page file)
   --on-changes                      Export drawio files only if it's newer than exported files
+  --git-ref <reference>             Any git reference (branch, tag, commit it, ...)
+                                    Need to be used with --on-changes in a git repository
+  --path <path>                     Path to the drawio files to export (default '.')
 
 Also support Draw.io CLI Options:
   [For all formats]

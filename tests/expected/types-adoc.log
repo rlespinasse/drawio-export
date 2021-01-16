@@ -1,0 +1,23 @@
++ export file : ./nominal.drawio
+++ export page 1 : Page-1
++++ generate png file
+./nominal.drawio -> ./test-assets-adoc/nominal-Page-1.png
++++ generate adoc file
+./test-assets-adoc/nominal-Page-1.adoc
+image 'nominal-Page-1.png'
++++ include links in adoc file
+link text 1 : Some text
+link 1 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
+link 2 : https://github.com/rlespinasse/qanda
+++ export page 2 : Page 2
++++ generate png file
+./nominal.drawio -> ./test-assets-adoc/nominal-Page-2.png
++++ generate adoc file
+./test-assets-adoc/nominal-Page-2.adoc
+image 'nominal-Page-2.png'
++++ include links in adoc file
+link text 1 : Some text
+link 1 : https://github.com/rlespinasse/qanda
+link text 2 : Some link
+link 2 : https://github.com/rlespinasse/qanda

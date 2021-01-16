@@ -12,6 +12,9 @@ IFS=$'\n\t'
 #/   --remove-page-suffix              Remove page suffix when possible
 #/                                     (in case of single page file)
 #/   --on-changes                      Export drawio files only if it's newer than exported files
+#/   --git-ref <reference>             Any git reference (branch, tag, commit it, ...)
+#/                                     Need to be used with --on-changes in a git repository
+#/   --path <path>                     Path to the drawio files to export (default '.')
 #/
 #/ Also support Draw.io CLI Options:
 #/   [For all formats]
@@ -53,6 +56,51 @@ usage() {
 
 # ----------------------------------------------------
 
+get_drawio_filepaths() {
+
+  if [ -n "${GIT_REF:-}" ]; then
+    get_drawio_filepaths_using_git | sort -u
+  else
+    get_drawio_filepaths_using_find | sort
+  fi
+}
+
+get_drawio_filepaths_using_git() {
+  local drawio_path="$DRAWIO_PATH"
+  if [ "$drawio_path" == "." ]; then
+    drawio_path=""
+  fi
+  while read -r filepath; do
+    if [ -f "${filepath}" ]; then
+      echo "$filepath"
+    fi
+  done \
+    < \
+    <({
+      git diff --name-only --cached
+      git diff --name-only "$GIT_REF"..HEAD
+    } | grep "^${drawio_path}" | grep ".drawio$")
+}
+
+get_drawio_filepaths_using_find() {
+  while read -r filepath; do
+    if [ "${ON_CHANGES}" == "true" ]; then
+      folder=$(dirname "$filepath")
+      file=$(basename "$filepath")
+      filename="${file%.*}"
+
+      mkdir -p "$folder/$OUTPUT_FOLDER"
+      if [ -n "$(find "$folder/$OUTPUT_FOLDER" -type f -name "${filename}*${EXPORT_TYPE}" -not -newer "$filepath")" ]; then
+        echo "$filepath"
+      fi
+    else
+      echo "$filepath"
+    fi
+  done \
+    < \
+    <(find "$DRAWIO_PATH" -name "*.drawio")
+}
+
 export_drawio_files() {
   local folder
   local file
@@ -64,15 +112,9 @@ export_drawio_files() {
     file=$(basename "$path")
     filename="${file%.*}"
 
-    echo "++ prepare export folder : $folder/$OUTPUT_FOLDER"
-    mkdir -p "$folder/$OUTPUT_FOLDER"
-
     export_drawio_pages "$path" "$folder" "$filename"
 
-    echo "++ cleanup export content : $folder/$OUTPUT_FOLDER/${filename}*"
-    find "$folder/$OUTPUT_FOLDER" -type f -name "${filename}*" -not -newer "$path" -delete
-
-  done < <(find . -name "*.drawio" | sort)
+  done < <(get_drawio_filepaths)
 }
 
 export_drawio_pages() {
@@ -113,28 +155,20 @@ export_drawio_page() {
   else
     output_file="${filename// /-}"
   fi
+  mkdir -p "$folder/$OUTPUT_FOLDER"
   output_filename="$folder/$OUTPUT_FOLDER/$output_file"
 
-  local should_retry=false
-  if [ "$path" -nt "$output_filename.$export_type" ]; then
-    should_retry=true
-  fi
+  printf "++ export page %s : %s\n" "$pagenum" "$page"
+  printf "+++ generate %s file\n" "$export_type"
+  export_diagram_file "$export_type" "$path" "$pagenum" "$output_filename"
 
-  if [ "$should_retry" == "false" ] && [ "$ON_CHANGES" == "true" ]; then
-    printf "++ page %s is already exported (skip this file)\n" "$pagenum"
-  else
-    printf "++ export page %s : %s\n" "$pagenum" "$page"
-    printf "+++ generate %s file\n" "$export_type"
-    export_diagram_file "$export_type" "$path" "$pagenum" "$output_filename"
+  if [ "$EXPORT_TYPE" == "adoc" ]; then
+    echo "+++ generate adoc file"
+    create_asciidoc_page "$path" "$filename" "$page" "$output_filename" "$output_file"
+    echo "image '$output_file.png'"
 
-    if [ "$EXPORT_TYPE" == "adoc" ]; then
-      echo "+++ generate adoc file"
-      create_asciidoc_page "$path" "$filename" "$page" "$output_filename" "$output_file"
-      echo "image '$output_file.png'"
-
-      echo "+++ include links in adoc file"
-      include_links_in_asciidoc_page "$path" "$page" "$output_filename"
-    fi
+    echo "+++ include links in adoc file"
+    include_links_in_asciidoc_page "$path" "$page" "$output_filename"
   fi
 }
 
@@ -276,10 +310,12 @@ CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
 REMOVE_PAGE_SUFFIX=false
 ON_CHANGES=false
+GIT_REF=
+DRAWIO_PATH=.
 CLI_OPTIONS_ARRAY=()
 
 set +e
-GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,on-changes,cli-options: --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,on-changes,git-ref:,path:,cli-options: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -311,6 +347,14 @@ while true; do
   --on-changes)
     ON_CHANGES=true
     shift
+    ;;
+  --git-ref)
+    GIT_REF=$2
+    shift 2
+    ;;
+  --path)
+    DRAWIO_PATH=$2
+    shift 2
     ;;
   # Draw.io CLI options
   -q | --quality)
@@ -387,5 +431,25 @@ command -v sgrep >/dev/null 2>&1 || {
   echo >&2 "I require sgrep but it's not installed.  Aborting."
   exit 1
 }
+
+if [ -n "${GIT_REF:-}" ]; then
+  if ! git -C . rev-parse >/dev/null 2>/dev/null; then
+    echo "--git-ref need a git repository to work with"
+    exit 1
+  elif ! git rev-parse --verify "$GIT_REF" >/dev/null 2>/dev/null; then
+    echo "--git-ref need a valid git reference"
+    exit 1
+  elif [ "$ON_CHANGES" == "false" ]; then
+    echo "--git-ref to be used with --on-changes"
+    exit 1
+  fi
+fi
+
+if [ -n "${DRAWIO_PATH:-}" ]; then
+  if [ ! -f "$DRAWIO_PATH" ] && [ ! -d "$DRAWIO_PATH" ]; then
+    echo "--path must exists (as directory or file)"
+    exit 1
+  fi
+fi
 
 export_drawio_files

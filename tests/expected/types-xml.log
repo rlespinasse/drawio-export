@@ -1,0 +1,7 @@
++ export file : ./nominal.drawio
+++ export page 1 : Page-1
++++ generate xml file
+./nominal.drawio -> ./test-assets-xml/nominal-Page-1.xml
+++ export page 2 : Page 2
++++ generate xml file
+./nominal.drawio -> ./test-assets-xml/nominal-Page-2.xml

@@ -1,0 +1,7 @@
++ export file : types/nominal.drawio
+++ export page 1 : Page-1
++++ generate pdf file
+types/nominal.drawio -> types/export/nominal-Page-1.pdf
+++ export page 2 : Page 2
++++ generate pdf file
+types/nominal.drawio -> types/export/nominal-Page-2.pdf
