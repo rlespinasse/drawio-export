@@ -24,8 +24,6 @@ Simple run with default options
   $ cd directory-with-drawio-files
   $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
   + export file : ./file1.drawio
-  ++ prepare export folder : ./export
-  ++ cleanup export content : ./export/file1*
   ++ export page 1 : Page-1
   +++ generate pdf file
   ./file1.drawio -> ./export/file1-Page-1.pdf

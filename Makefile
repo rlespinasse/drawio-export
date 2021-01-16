@@ -12,8 +12,10 @@ setup-test:
 	@npm install -g bats
 
 test: cleanup build
-	@DOCKER_IMAGE=$(DOCKER_IMAGE) bats -r .
+	@mkdir -p tests/output
+	@DOCKER_IMAGE=$(DOCKER_IMAGE) bats -r tests
 
 cleanup:
 	@find tests -name "export" | xargs -I {} rm -r "{}"
 	@find tests -name "test-*" | xargs -I {} rm -r "{}"
+	@rm -rf tests/output
