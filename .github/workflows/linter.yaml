@@ -2,9 +2,6 @@ name: Lint
 
 on:
   pull_request:
-  push:
-    branches:
-      - v3.x
 
 jobs:
   lint:
