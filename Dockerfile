@@ -1,4 +1,4 @@
-FROM rlespinasse/drawio-cli:3.1.1
+FROM rlespinasse/drawio-desktop-headless:1.0.1
 
 # install git for '--git-ref' option
 RUN set -e; \
@@ -6,12 +6,13 @@ RUN set -e; \
   git=1:2.20.1-2+deb10u3 \
   && rm -rf /var/lib/apt/lists/*;
 
-# keep runner.sh from drawio-cli base image
-RUN mv runner.sh cli-runner.sh
-
 # setup the drawio-export files
-COPY runner.sh .
-COPY runner.env .
+COPY export.sh .
+COPY export.env .
+
+# disable timeout capabilities since it's a batch
+ENV DRAWIO_DESKTOP_COMMAND_TIMEOUT 0
+ENV DRAWIO_DESKTOP_RUNNER_COMMAND_LINE "/opt/drawio-desktop/export.sh"
 
 WORKDIR /data
 CMD [ "" ]

@@ -179,8 +179,7 @@ export_diagram_file() {
   local output_filename="$4"
 
   # shellcheck disable=SC2086
-  DRAWIO_CLI_SUPPRESS_WARNINGS=true \
-    "$SCRIPT_FOLDER/cli-runner.sh" \
+  "$SCRIPT_FOLDER/runner.sh" \
     -x \
     -f "$export_type" \
     "${CLI_OPTIONS_ARRAY[@]}" \
@@ -304,7 +303,7 @@ include_link_in_asciidoc_page() {
 
 SCRIPT_FOLDER=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 # shellcheck disable=SC1090
-source "$SCRIPT_FOLDER/runner.env"
+source "$SCRIPT_FOLDER/export.env"
 EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
@@ -422,8 +421,8 @@ done
 
 link_separator='###'
 
-if [ -z "${DRAWIO_CLI:-}" ]; then
-  echo >&2 "define DRAWIO_CLI as the path to draw.io desktop application"
+if [ -z "${DRAWIO_DESKTOP_EXECUTABLE_PATH:-}" ]; then
+  echo >&2 "define DRAWIO_DESKTOP_EXECUTABLE_PATH as the path to draw.io desktop application"
   exit 1
 fi
 
