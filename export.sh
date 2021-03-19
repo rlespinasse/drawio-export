@@ -3,53 +3,57 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-#/ Usage: drawio-export [Options]
+#/ Usage: drawio-export [Options] PATH
+#/
+#/ Arguments:
+#/   PATH                          Path to the drawio files to export (default '.')
+#/
 #/ Options:
-#/   -E, --fileext <fileext>           Extension of exported files (default 'pdf').
-#/                                     [adoc, jpg, pdf, png, svg, vsdx, xml]
-#/   -F, --folder <folder>             Export folder name (default 'export').
-#/   -h, --help                        Display this help message.
-#/   --remove-page-suffix              Remove page suffix when possible
-#/                                     (in case of single page file)
-#/   --on-changes                      Export drawio files only if it's newer than exported files
-#/   --git-ref <reference>             Any git reference (branch, tag, commit it, ...)
-#/                                     Need to be used with --on-changes in a git repository
-#/   --path <path>                     Path to the drawio files to export (default '.')
+#/   -f, --format <format>         Extension of exported files (default 'pdf').
+#/                                 [adoc, jpg, pdf, png, svg, vsdx, xml]
+#/   -o, --output <folder>         Exported folder name (default 'export').
+#/   -h, --help                    Display this help message.
+#/   --remove-page-suffix          Remove page suffix when possible
+#/                                 (in case of single page file)
+#/   --on-changes                  Export drawio files only if it's newer than exported files
+#/   --git-ref <reference>         Any git reference (branch, tag, commit it, ...)
+#/                                 Need to be used with --on-changes in a git repository
 #/
 #/ Also support Draw.io CLI Options:
 #/   [For all formats]
-#/   -b, --border <border>             Sets the border width around the diagram (default: 0).
-#/   -s, --scale <scale>               Scales the diagram size.
+#/   -b, --border <border>         Sets the border width around the diagram (default: 0).
+#/   -s, --scale <scale>           Scales the diagram size.
 #/
 #/   [Only for PDF format]
-#/   --width <width>                   Fits the generated image/pdf into
-#/                                     the specified width, preserves aspect ratio.
-#/   --height <height>                 Fits the generated image/pdf into
-#/                                     the specified height, preserves aspect ratio.
-#/   --crop                            Crops PDF to diagram size.
+#/   --width <width>               Fits the generated image/pdf into
+#/                                 the specified width, preserves aspect ratio.
+#/   --height <height>             Fits the generated image/pdf into
+#/                                 the specified height, preserves aspect ratio.
+#/   --crop                        Crops PDF to diagram size.
 #/
 #/   [Only for PNG format]
-#/   -e, --embed-diagram               Includes a copy of the diagram.
-#/   -t, --transparent                 Set transparent background for PNG.
+#/   -e, --embed-diagram           Includes a copy of the diagram.
+#/   -t, --transparent             Set transparent background for PNG.
 #/
 #/   [Only for JPEG format]
-#/   -q, --quality <quality>           Output image quality for JPEG (default: 90).
+#/   -q, --quality <quality>       Output image quality for JPEG (default: 90).
 #/
 #/   [Only for XML format]
-#/   -u, --uncompressed                Uncompressed XML output.
+#/   -u, --uncompressed            Uncompressed XML output.
 #/
 #/ Environment variables:
-#/   DRAWIO_EXPORT_FILEEXT             Same as '--fileext', will be override
-#/                                     if '--fileext' is set.
-#/   DRAWIO_EXPORT_CLI_OPTIONS         Options for Draw.io CLI (default '--crop'),
-#/                                     will be override if any CLI option is set.
-#/   DRAWIO_EXPORT_FOLDER              Same as '--export-folder', will be override
-#/                                     if '--export-folder' is set.
+#/   DRAWIO_EXPORT_FILEEXT         Same as '--fileext', will be override
+#/                                 if '--fileext' is set.
+#/   DRAWIO_EXPORT_CLI_OPTIONS     Options for Draw.io CLI (default '--crop'),
+#/                                 will be override if any CLI option is set.
+#/   DRAWIO_EXPORT_FOLDER          Same as '--export-folder', will be override
+#/                                 if '--export-folder' is set.
 #/
 #/ Deprecated Options:
-#/   -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
-#/                                     See 'Draw.io CLI Options' section.
-#/                                     DEPRECATED: only support one argument.
+#/   -E, --fileext <fileext>       DEPRECATED: Use -f, --format <format> instead
+#/   -F, --folder <folder>         DEPRECATED: Use -o, --output <folder> instead
+#/   --path <path>                 DEPRECATED: Use argument PATH instead
+#/   -C, --cli-options <options>   DEPRECATED: Use specfic argument instead
 usage() {
   grep '^#/' "$0" | cut -c4-
 }
@@ -304,6 +308,11 @@ include_link_in_asciidoc_page() {
 SCRIPT_FOLDER=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 # shellcheck disable=SC1090
 source "$SCRIPT_FOLDER/export.env"
+
+SHOW_DEPRECATED_MESSAGE=false
+if [ -n "${DRAWIO_EXPORT_FILEEXT:-}" ] || [ -n "${DRAWIO_EXPORT_CLI_OPTIONS:-}" ] || [ -n "${DRAWIO_EXPORT_FOLDER:-}" ]; then
+  SHOW_DEPRECATED_MESSAGE=true
+fi
 EXPORT_TYPE=${DRAWIO_EXPORT_FILEEXT:-${DEFAULT_DRAWIO_EXPORT_FILEEXT}}
 CLI_OPTIONS=${DRAWIO_EXPORT_CLI_OPTIONS:-${DEFAULT_DRAWIO_EXPORT_CLI_OPTIONS}}
 OUTPUT_FOLDER=${DRAWIO_EXPORT_FOLDER:-${DEFAULT_DRAWIO_EXPORT_FOLDER}}
@@ -314,7 +323,7 @@ DRAWIO_PATH=.
 CLI_OPTIONS_ARRAY=()
 
 set +e
-GETOPT=$(getopt -o hE:F:q:teb:s:uC: -l help,fileext:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,on-changes,git-ref:,path:,cli-options: --name "draw-export" -- "$@")
+GETOPT=$(getopt -o hf:E:o:F:q:teb:s:uC: -l help,format:,fileext:,output:,folder:,quality:,transparent,embed-diagram,border:,scale:,uncompressed,height:,width:,crop,remove-page-suffix,on-changes,git-ref:,path:,cli-options: --name "draw-export" -- "$@")
 # shellcheck disable=SC2181
 if [ $? != 0 ]; then
   echo "Failed to parse options...exiting." >&2
@@ -331,11 +340,21 @@ while true; do
     usage
     exit 0
     ;;
-  -E | --fileext)
+  -f | --format)
     EXPORT_TYPE=$2
     shift 2
     ;;
+  -E | --fileext)
+    SHOW_DEPRECATED_MESSAGE=true
+    EXPORT_TYPE=$2
+    shift 2
+    ;;
+  -o | --output)
+    OUTPUT_FOLDER=$2
+    shift 2
+    ;;
   -F | --folder)
+    SHOW_DEPRECATED_MESSAGE=true
     OUTPUT_FOLDER=$2
     shift 2
     ;;
@@ -352,6 +371,7 @@ while true; do
     shift 2
     ;;
   --path)
+    SHOW_DEPRECATED_MESSAGE=true
     DRAWIO_PATH=$2
     shift 2
     ;;
@@ -408,6 +428,7 @@ while true; do
     ;;
   # Deprecated options
   -C | --cli-options)
+    SHOW_DEPRECATED_MESSAGE=true
     CLI_OPTIONS=$2
     shift 2
     ;;
@@ -419,11 +440,20 @@ while true; do
   esac
 done
 
+if [ -n "${1:-}" ]; then
+  DRAWIO_PATH="${1}"
+fi
+
 link_separator='###'
 
 if [ -z "${DRAWIO_DESKTOP_EXECUTABLE_PATH:-}" ]; then
   echo >&2 "define DRAWIO_DESKTOP_EXECUTABLE_PATH as the path to draw.io desktop application"
   exit 1
+fi
+
+if [ "${SHOW_DEPRECATED_MESSAGE}" == "true" ]; then
+  echo >&2 "WARN: Consider not using a deprecated option, it's will be removed in the next major version."
+  echo >&2 "WARN: Print help for more information."
 fi
 
 command -v sgrep >/dev/null 2>&1 || {
@@ -446,7 +476,7 @@ fi
 
 if [ -n "${DRAWIO_PATH:-}" ]; then
   if [ ! -f "$DRAWIO_PATH" ] && [ ! -d "$DRAWIO_PATH" ]; then
-    echo "--path must exists (as directory or file)"
+    echo "Path '${DRAWIO_PATH}' must exists (as directory or file)"
     exit 1
   fi
 fi

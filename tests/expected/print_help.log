@@ -1,47 +1,51 @@
-Usage: drawio-export [Options]
+Usage: drawio-export [Options] PATH
+
+Arguments:
+  PATH                          Path to the drawio files to export (default '.')
+
 Options:
-  -E, --fileext <fileext>           Extension of exported files (default 'pdf').
-                                    [adoc, jpg, pdf, png, svg, vsdx, xml]
-  -F, --folder <folder>             Export folder name (default 'export').
-  -h, --help                        Display this help message.
-  --remove-page-suffix              Remove page suffix when possible
-                                    (in case of single page file)
-  --on-changes                      Export drawio files only if it's newer than exported files
-  --git-ref <reference>             Any git reference (branch, tag, commit it, ...)
-                                    Need to be used with --on-changes in a git repository
-  --path <path>                     Path to the drawio files to export (default '.')
+  -f, --format <format>         Extension of exported files (default 'pdf').
+                                [adoc, jpg, pdf, png, svg, vsdx, xml]
+  -o, --output <folder>         Exported folder name (default 'export').
+  -h, --help                    Display this help message.
+  --remove-page-suffix          Remove page suffix when possible
+                                (in case of single page file)
+  --on-changes                  Export drawio files only if it's newer than exported files
+  --git-ref <reference>         Any git reference (branch, tag, commit it, ...)
+                                Need to be used with --on-changes in a git repository
 
 Also support Draw.io CLI Options:
   [For all formats]
-  -b, --border <border>             Sets the border width around the diagram (default: 0).
-  -s, --scale <scale>               Scales the diagram size.
+  -b, --border <border>         Sets the border width around the diagram (default: 0).
+  -s, --scale <scale>           Scales the diagram size.
 
   [Only for PDF format]
-  --width <width>                   Fits the generated image/pdf into
-                                    the specified width, preserves aspect ratio.
-  --height <height>                 Fits the generated image/pdf into
-                                    the specified height, preserves aspect ratio.
-  --crop                            Crops PDF to diagram size.
+  --width <width>               Fits the generated image/pdf into
+                                the specified width, preserves aspect ratio.
+  --height <height>             Fits the generated image/pdf into
+                                the specified height, preserves aspect ratio.
+  --crop                        Crops PDF to diagram size.
 
   [Only for PNG format]
-  -e, --embed-diagram               Includes a copy of the diagram.
-  -t, --transparent                 Set transparent background for PNG.
+  -e, --embed-diagram           Includes a copy of the diagram.
+  -t, --transparent             Set transparent background for PNG.
 
   [Only for JPEG format]
-  -q, --quality <quality>           Output image quality for JPEG (default: 90).
+  -q, --quality <quality>       Output image quality for JPEG (default: 90).
 
   [Only for XML format]
-  -u, --uncompressed                Uncompressed XML output.
+  -u, --uncompressed            Uncompressed XML output.
 
 Environment variables:
-  DRAWIO_EXPORT_FILEEXT             Same as '--fileext', will be override
-                                    if '--fileext' is set.
-  DRAWIO_EXPORT_CLI_OPTIONS         Options for Draw.io CLI (default '--crop'),
-                                    will be override if any CLI option is set.
-  DRAWIO_EXPORT_FOLDER              Same as '--export-folder', will be override
-                                    if '--export-folder' is set.
+  DRAWIO_EXPORT_FILEEXT         Same as '--fileext', will be override
+                                if '--fileext' is set.
+  DRAWIO_EXPORT_CLI_OPTIONS     Options for Draw.io CLI (default '--crop'),
+                                will be override if any CLI option is set.
+  DRAWIO_EXPORT_FOLDER          Same as '--export-folder', will be override
+                                if '--export-folder' is set.
 
 Deprecated Options:
-  -C, --cli-options <options>       Options for Draw.io CLI (default '--crop'),
-                                    See 'Draw.io CLI Options' section.
-                                    DEPRECATED: only support one argument.
+  -E, --fileext <fileext>       DEPRECATED: Use -f, --format <format> instead
+  -F, --folder <folder>         DEPRECATED: Use -o, --output <folder> instead
+  --path <path>                 DEPRECATED: Use argument PATH instead
+  -C, --cli-options <options>   DEPRECATED: Use specfic argument instead
