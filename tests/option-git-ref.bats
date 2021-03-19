@@ -15,7 +15,7 @@
 }
 
 @test "Export using --git-ref <root commit> (has changes)" {
-  docker_test "" 0 "option-git-ref_root_commit" "." --path "tests/data/types" --on-changes --git-ref $(git rev-list HEAD | tail -n 1) --folder test-assets-git-ref
+  docker_test "" 0 "option-git-ref_root_commit" "." --on-changes --git-ref $(git rev-list HEAD | tail -n 1) --output test-assets-git-ref "tests/data/types"
 }
 
 @test "Export using --git-ref HEAD (no changes)" {
@@ -23,5 +23,5 @@
     skip "This test is designed to work without any files in the commit staging area"
   fi
 
-  docker_test "" 0 "option-git-ref_HEAD" "." --path "tests/data/types" --on-changes --git-ref HEAD --folder test-assets-git-ref
+  docker_test "" 0 "option-git-ref_HEAD" "." --on-changes --git-ref HEAD --output test-assets-git-ref "tests/data/types"
 }
