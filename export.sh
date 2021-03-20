@@ -251,44 +251,32 @@ get_rawxml_diagram_page() {
   } | (gzip -dc 2>/dev/null || true) | sed 's@+@ @g;s@%@\\x@g'
 }
 
+cleanup_link() {
+  echo "${1}" |
+    # Clean <br>
+    sed 's/&lt;br&gt;\?/ /g' |
+    # Clean &nbsp;
+    sed 's/&amp;nbsp;/ /g' |
+    # Clean <div>text</div>
+    sed 's/&lt;div&gt;/ /g;s/&lt;\/div&gt;\?/ /g' |
+    # Manage '--' (Em dash) string in asciidoc
+    sed 's/\([^-]\+\)\(--\)/\1\\\2/g' |
+    # Trim space
+    sed 's/\s\+/ /g;s/^\s//;s/\s$//'
+}
+
 include_link_in_asciidoc_page() {
   local linknum="$1"
   local linkdata="$2"
   local output_filename="$3"
 
   local link
-  link=$(
-    echo "$linkdata" |
-      # Isolate the link
-      sed 's/.*'"$link_separator"'//' |
-      # Clean <br>
-      sed 's/&lt;br&gt;\?/ /g' |
-      # Clean &nbsp;
-      sed 's/&amp;nbsp;/ /g' |
-      # Clean <div>text</div>
-      sed 's/&lt;div&gt;/ /g;s/&lt;\/div&gt;\?/ /g' |
-      # Manage '--' (Em dash) string in asciidoc
-      sed 's/\([^-]\+\)\(--\)/\1\\\2/g' |
-      # Trim space
-      sed 's/\s\+/ /g;s/^\s//;s/\s$//'
-  )
+  # shellcheck disable=SC2001
+  link=$(cleanup_link "$(echo "$linkdata" | sed 's/.*'"$link_separator"'//')")
 
   local text
-  text=$(
-    echo "$linkdata" |
-      # Isolate the link text
-      sed 's/'"$link_separator"'.*//' |
-      # Clean <br>
-      sed 's/&lt;br&gt;\?/ /g' |
-      # Clean &nbsp;
-      sed 's/&amp;nbsp;/ /g' |
-      # Clean <div>text</div>
-      sed 's/&lt;div&gt;/ /g;s/&lt;\/div&gt;\?/ /g' |
-      # Manage '--' (Em dash) string in asciidoc
-      sed 's/\([^-]\+\)\(--\)/\1\\\2/g' |
-      # Trim space
-      sed 's/\s\+/ /g;s/^\s//;s/\s$//'
-  )
+  # shellcheck disable=SC2001
+  text=$(cleanup_link "$(echo "$linkdata" | sed 's/'"$link_separator"'.*//')")
 
   printf "link text %s : %s\n" "$linknum" "$text"
   if [ "$link" == "$text" ]; then
