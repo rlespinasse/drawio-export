@@ -1,1 +1,5 @@
---git-ref need a valid git reference
+Error: can't explore path .
+
+Caused by:
+    0: can't found reference unknown-ref on /data/.git/
+    1: revspec 'unknown-ref' not found; class=Reference (4); code=NotFound (-3)

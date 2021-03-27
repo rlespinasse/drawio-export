@@ -1,6 +1,18 @@
 # Draw.io Export
 
-Export Draw.io diagrams using command line / docker
+Export Draw.io diagrams using docker
+
+## Features
+
+* Recursive export
+* Partial export (newer, or based on git reference)
+* Additional export formats with link extraction
+
+## Supported Export formats
+
+* **draw.io** export formats : jpg, pdf, png, svg, vsdx, and xml
+* **drawio-exporter** additional formats
+  * adoc - Export in png and create an additional asciidoc file (with support external links).
 
 ## Installation
 
@@ -26,10 +38,8 @@ Simple run with default options
   + export file : ./file1.drawio
   ++ export page 1 : Page-1
   +++ generate pdf file
-  ./file1.drawio -> ./export/file1-Page-1.pdf
   ++ export page 2 : Page 2
   +++ generate pdf file
-  ./file1.drawio -> ./export/file1-Page-2.pdf
   ```
 
 Want to read more, go to [rlespinasse/drawio-export][1] on GitHub.

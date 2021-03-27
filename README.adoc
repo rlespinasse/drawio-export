@@ -4,18 +4,18 @@ image:https://img.shields.io/docker/v/rlespinasse/drawio-export[Docker Version,l
 image:https://img.shields.io/docker/pulls/rlespinasse/drawio-export[Docker Pull,link=https://hub.docker.com/r/rlespinasse/drawio-export]
 image:https://github.com/rlespinasse/drawio-export/workflows/Build/badge.svg[Build]
 
-Export Draw.io diagrams using command line / docker
+Export Draw.io diagrams using docker
+
+== Features
+
+* Recursive export
+* Partial export (newer, or based on git reference)
+* Additional export formats with link extraction
 
 == Supported Export formats
 
-* **draw.io** export formats
-** jpg
-** pdf
-** png
-** svg
-** vsdx
-** xml
-* **drawio-export** additional formats
+* **draw.io** export formats : jpg, pdf, png, svg, vsdx, and xml
+* **drawio-exporter** additional formats
 ** adoc - Export in png and create an additional asciidoc file (with support external links).
 
 == Installation
@@ -41,10 +41,8 @@ $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 + export file : ./file1.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./file1.drawio -> ./export/file1-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./file1.drawio -> ./export/file1-Page-2.pdf
 ----
 
 == Integrations
@@ -75,13 +73,13 @@ jobs:
       - name: Export drawio files to asciidoctor and png files
         uses: docker://rlespinasse/drawio-export:<VERSION>
         with:
-          args: --fileext adoc --folder drawio-assets --transparent
+          args: --format adoc --output drawio-assets --transparent
 
       - name: Get author and committer info from HEAD commit
         uses: rlespinasse/git-commit-data-action@v1.x
 
       - name: Commit changed files
-        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        uses: stefanzweifel/git-auto-commit-action@v4.9.2
         with:
           commit_message: "docs: sync draw.io exported files"
           commit_user_name: "${{ env.GIT_COMMIT_COMMITTER_NAME }}"

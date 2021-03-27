@@ -1,8 +1,6 @@
-+ export file : ./name-collision.drawio
++ export file : name-collision.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./name-collision.drawio -> ./export/name-collision-Page-1.pdf
-+ export file : ./name.drawio
++ export file : name.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./name.drawio -> ./export/name-Page-1.pdf
