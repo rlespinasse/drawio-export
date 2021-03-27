@@ -1,7 +1,5 @@
-+ export file : ./file with spaces.drawio
++ export file : file with spaces.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./file with spaces.drawio -> ./export/file-with-spaces-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./file with spaces.drawio -> ./export/file-with-spaces-Page-2.pdf

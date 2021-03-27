@@ -1,7 +1,5 @@
-+ export file : ./nominal.drawio
++ export file : nominal.drawio
 ++ export page 1 : Page-1
 +++ generate png file
-./nominal.drawio -> ./test-assets-png/nominal-Page-1.png
 ++ export page 2 : Page 2
 +++ generate png file
-./nominal.drawio -> ./test-assets-png/nominal-Page-2.png

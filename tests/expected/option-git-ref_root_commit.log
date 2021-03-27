@@ -1,7 +1,5 @@
-+ export file : tests/data/types/nominal.drawio
++ export file : nominal.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-tests/data/types/nominal.drawio -> tests/data/types/test-assets-git-ref/nominal-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-tests/data/types/nominal.drawio -> tests/data/types/test-assets-git-ref/nominal-Page-2.pdf

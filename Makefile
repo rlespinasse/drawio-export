@@ -4,6 +4,9 @@ DOCKER_IMAGE?=rlespinasse/drawio-export:local
 build:
 	@docker build -t ${DOCKER_IMAGE} .
 
+build-no-cache:
+	@docker build --no-cache -t ${DOCKER_IMAGE} .
+
 RUN_ARGS?=
 run:
 	@docker run -it -v $(PWD):/data ${DOCKER_IMAGE} ${RUN_ARGS}

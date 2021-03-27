@@ -1,28 +1,20 @@
-+ export file : ./file1.drawio
++ export file : file1.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./file1.drawio -> ./export/file1-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./file1.drawio -> ./export/file1-Page-2.pdf
-+ export file : ./folder1/file2.1.drawio
++ export file : folder1/file2.1.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./folder1/file2.1.drawio -> ./folder1/export/file2.1-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./folder1/file2.1.drawio -> ./folder1/export/file2.1-Page-2.pdf
-+ export file : ./folder1/file2.2.drawio
++ export file : folder1/file2.2.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./folder1/file2.2.drawio -> ./folder1/export/file2.2-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./folder1/file2.2.drawio -> ./folder1/export/file2.2-Page-2.pdf
-+ export file : ./folder2/folder3/file3.drawio
++ export file : folder2/folder3/file3.drawio
 ++ export page 1 : Page-1
 +++ generate pdf file
-./folder2/folder3/file3.drawio -> ./folder2/folder3/export/file3-Page-1.pdf
 ++ export page 2 : Page 2
 +++ generate pdf file
-./folder2/folder3/file3.drawio -> ./folder2/folder3/export/file3-Page-2.pdf

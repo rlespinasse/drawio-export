@@ -1,13 +1,9 @@
-+ export file : ./shapes.drawio
++ export file : shapes.drawio
 ++ export page 1 : AWS
 +++ generate pdf file
-./shapes.drawio -> ./export/shapes-AWS.pdf
 ++ export page 2 : Azure
 +++ generate pdf file
-./shapes.drawio -> ./export/shapes-Azure.pdf
 ++ export page 3 : GCP
 +++ generate pdf file
-./shapes.drawio -> ./export/shapes-GCP.pdf
 ++ export page 4 : K8S
 +++ generate pdf file
-./shapes.drawio -> ./export/shapes-K8S.pdf

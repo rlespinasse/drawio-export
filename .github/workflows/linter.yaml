@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: technote-space/auto-cancel-redundant-workflow@v1
+
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
@@ -18,5 +20,5 @@ jobs:
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: v3.x
+          DEFAULT_BRANCH: v4.x
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
