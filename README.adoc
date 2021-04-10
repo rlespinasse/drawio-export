@@ -45,48 +45,9 @@ $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 +++ generate pdf file
 ----
 
-== Integrations
+== Used by
 
-.GitHub Action : Export and commit your draw.io files
-[%collapsible]
-====
-..github/workflows/drawio-export.yaml
-[source,yaml]
-----
-name: Keep draw.io export synchronized
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - "**.drawio"
-      - .github/workflows/drawio-export.yml
-jobs:
-  drawio-export:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Export drawio files to asciidoctor and png files
-        uses: docker://rlespinasse/drawio-export:<VERSION>
-        with:
-          args: --format adoc --output drawio-assets --transparent
-
-      - name: Get author and committer info from HEAD commit
-        uses: rlespinasse/git-commit-data-action@v1.x
-
-      - name: Commit changed files
-        uses: stefanzweifel/git-auto-commit-action@v4.9.2
-        with:
-          commit_message: "docs: sync draw.io exported files"
-          commit_user_name: "${{ env.GIT_COMMIT_COMMITTER_NAME }}"
-          commit_user_email: "${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
-          commit_author: "${{ env.GIT_COMMIT_AUTHOR }}"
-----
-====
+* GitHub Action https://github.com/rlespinasse/drawio-export-action[**drawio-export-action**] : which is build on top of **drawio-export** docker image.
 
 == Contributing
 
