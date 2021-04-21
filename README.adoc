@@ -47,8 +47,8 @@ $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
 
 == Build on top of
 
-* https://github.com/rlespinasse/docker-drawio-export-headless[**rlespinasse/drawio-export-headless**] as base docker image to use Draw.io Desktop for its command lines,
-* https://github.com/rlespinasse/drawio-exporter[**rlespinasse/drawio-exporter**] as backend for export capabilities.
+* https://github.com/rlespinasse/docker-drawio-desktop-headless[**rlespinasse/drawio-export-headless**] as base docker image to use Draw.io Desktop for its command lines,
+* https://github.com/rlespinasse/drawio-exporter[**drawio-exporter**] as backend for export capabilities.
 
 == Used by
 
