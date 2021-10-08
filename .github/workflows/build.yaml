@@ -42,3 +42,4 @@ jobs:
         uses: rlespinasse/release-that@v1.x
         with:
           without-prefix: true
+          github-token: ${{ secrets.GH_TOKEN }}
