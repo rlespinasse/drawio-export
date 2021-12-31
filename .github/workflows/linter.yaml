@@ -7,10 +7,10 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-
+    concurrency:
+      group: lint-${{ github.ref }}-${{ github.event_name }}
+      cancel-in-progress: true
     steps:
-      - uses: technote-space/auto-cancel-redundant-workflow@v1
-
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
