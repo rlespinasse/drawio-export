@@ -12,10 +12,10 @@ jobs:
   dockerHubDescription:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Sync information on Docker Hub
-        uses: rlespinasse/sync-readme@v1.0.6
+        uses: peter-evans/dockerhub-description@v3
         with:
-          pass: ${{ secrets.DOCKER_PASSWORD }}
-          readme: ./DOCKER.md
-          description: true
+          username: rlespinasse
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          readme-filepath: ./DOCKER.md
