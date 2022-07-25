@@ -12,7 +12,8 @@ Export Draw.io diagrams using docker
 
 * **draw.io** export formats : jpg, pdf, png, svg, vsdx, and xml
 * **drawio-exporter** additional formats
-  * adoc - Export in png and create an additional asciidoc file (with support external links).
+  * adoc - Export in PNG and create an additional Asciidoc file (with support external links).
+  * md - Export in PNG and create an additional Markdown file (with support external links).
 
 ## Installation
 
