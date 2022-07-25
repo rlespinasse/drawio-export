@@ -13,12 +13,13 @@ jobs:
       cancel-in-progress: true
     steps:
       # Setup
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v1
-      - uses: rlespinasse/github-slug-action@v3.x
+      - uses: actions/setup-node@v3
+
+      - uses: rlespinasse/github-slug-action@v4
 
       # Build and test
       - name: Build docker image
@@ -35,7 +36,7 @@ jobs:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
 
       - name: Test docker image // Store output logs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-docker-image-logs
           path: "tests/output/*.log"
@@ -47,7 +48,7 @@ jobs:
     concurrency:
       group: release-${{ github.ref }}-${{ github.event_name }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Release this docker image
         uses: rlespinasse/release-that@v1
         with:

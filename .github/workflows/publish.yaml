@@ -6,10 +6,10 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: rlespinasse/github-slug-action@v3.x
+      - uses: actions/checkout@3
+      - uses: rlespinasse/github-slug-action@v4
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@2.22
+        uses: elgohr/Publish-Docker-Github-Action@v4
         with:
           name: ${{ github.repository }}
           username: ${{ secrets.DOCKER_USERNAME }}
