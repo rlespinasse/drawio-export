@@ -1,12 +1,12 @@
 name: Publish to Registry
 on:
   release:
-    types: [published]
+    types: [published,edited]
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3
+      - uses: actions/checkout@v3
       - uses: rlespinasse/github-slug-action@v4
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
