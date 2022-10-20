@@ -1,7 +1,7 @@
-[1;31merror:[0m The following required arguments were not provided:
-    [1;31m--on-changes[0m
+error: The following required arguments were not provided:
+    --on-changes
 
 USAGE:
     drawio-exporter --border <border> --quality <quality> --drawio-desktop-headless --output <folder> --format <format> --git-ref <reference> --on-changes
 
-For more information try [32m--help[0m
+For more information try --help
