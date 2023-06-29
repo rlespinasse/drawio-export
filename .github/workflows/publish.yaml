@@ -1,7 +1,7 @@
 name: Publish to Registry
 on:
   release:
-    types: [published,edited]
+    types: [published, edited]
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: rlespinasse/github-slug-action@v4
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@v4
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: ${{ github.repository }}
           username: ${{ secrets.DOCKER_USERNAME }}
