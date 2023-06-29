@@ -9,6 +9,8 @@ docker_test() {
   shift
   shift
   shift
+
+  # shellcheck disable=SC2086,SC2046
   run docker container run -t $docker_opts -w /data -v $(pwd)/${data_folder:-}:/data ${DOCKER_IMAGE} "$@"
 
   # shellcheck disable=SC2154
