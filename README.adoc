@@ -15,7 +15,7 @@ Export Draw.io diagrams using docker
 ** adoc - Export in png and create an additional asciidoc file (with support external links).
 ** md - Export in png and create an additional markdown file (with support external links).
 
-== Supported fonts formats
+== Additional fonts
 
 Check installed fonts list from https://github.com/rlespinasse/docker-drawio-desktop-headless[drawio-desktop-headless] docker base image.
 
