@@ -19,6 +19,8 @@ Export Draw.io diagrams using docker
 
 Check installed fonts list from https://github.com/rlespinasse/docker-drawio-desktop-headless[drawio-desktop-headless] docker base image.
 
+NOTE: Want a new font package, modify the https://github.com/rlespinasse/docker-drawio-desktop-headless[drawio-desktop-headless] project.
+
 == Installation
 
 [source,bash]
