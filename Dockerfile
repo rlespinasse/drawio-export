@@ -2,11 +2,11 @@ FROM rust:buster as drawio-exporter-installer
 
 RUN cargo install --version 1.2.0 drawio-exporter
 
-FROM rlespinasse/drawio-desktop-headless:v1.10.0
+FROM rlespinasse/drawio-desktop-headless:v1.13.0
 
 WORKDIR /opt/drawio-exporter
 COPY --from=drawio-exporter-installer /usr/local/cargo/bin/drawio-exporter .
-COPY scripts/* ./
+COPY src/* ./
 
 # disable timeout capabilities since it's a batch
 ENV DRAWIO_DESKTOP_COMMAND_TIMEOUT 0
