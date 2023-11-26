@@ -2,12 +2,15 @@ version: 2
 updates:
   - package-ecosystem: "docker"
     directory: "/"
+    commit-message:
+      prefix: "feat: "
     schedule:
       interval: "weekly"
-    groups:
-      dependencies:
-        patterns:
-          - "*" 
+      day: "tuesday"
+      time: "00:00"
+    reviewers:
+      - "rlespinasse"
+    labels: [ ]
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -16,4 +19,7 @@ updates:
     groups:
       dependencies:
         patterns:
-          - "*" 
+          - "*"
+    reviewers:
+      - "rlespinasse"
+    labels: [ ]
