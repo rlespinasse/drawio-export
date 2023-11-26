@@ -13,10 +13,10 @@ jobs:
       cancel-in-progress: true
     steps:
       # Setup
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
       - uses: rlespinasse/github-slug-action@v4
       - name: Build docker image
         run: make build
@@ -53,14 +53,14 @@ jobs:
       group: build-multiarch-${{ github.ref }}-${{ github.event_name }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: rlespinasse/github-slug-action@v4
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: "arm64,arm"
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Build docker image
         run: make build-multiarch
         shell: bash
@@ -75,7 +75,7 @@ jobs:
     concurrency:
       group: release-${{ github.ref }}-${{ github.event_name }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Release this docker image
         uses: rlespinasse/release-that@v1
         with:
