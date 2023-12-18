@@ -32,13 +32,13 @@ jobs:
         env:
           DOCKER_IMAGE: ${{ github.repository }}:${{ env.GITHUB_REF_SLUG }}
       - name: Test docker image // Store output logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-docker-image-logs
           path: "tests/output/*.log"
         if: ${{ always() }}
       - name: Test docker image // Store output files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-docker-image-files
           path: |
