@@ -5,9 +5,7 @@ updates:
     commit-message:
       prefix: "feat: "
     schedule:
-      interval: "weekly"
-      day: "tuesday"
-      time: "00:00"
+      interval: "daily"
     reviewers:
       - "rlespinasse"
     labels: [ ]
