@@ -28,4 +28,4 @@ test-ci-setup:
 
 test-ci:
 	@mkdir -p tests/output
-	@DOCKER_IMAGE=$(DOCKER_IMAGE) npx bats -r tests
+	@DOCKER_IMAGE=$(DOCKER_IMAGE) npx bats --verbose-run -r tests
