@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
-      - uses: rlespinasse/github-slug-action@v4
+      - uses: rlespinasse/github-slug-action@v5
       - name: Build docker image
         run: make build
         shell: bash
@@ -54,7 +54,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - uses: rlespinasse/github-slug-action@v4
+      - uses: rlespinasse/github-slug-action@v5
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
