@@ -1,6 +1,6 @@
 FROM rust:buster as drawio-exporter-installer
 
-RUN cargo install --version 1.2.0 drawio-exporter
+RUN cargo install drawio-exporter --version 1.3.0
 
 FROM rlespinasse/drawio-desktop-headless:v1.40.0
 
