@@ -1,4 +1,4 @@
-FROM rust:buster as drawio-exporter-installer
+FROM rust:bullseye as drawio-exporter-installer
 
 RUN cargo install drawio-exporter --version 1.3.0
 
