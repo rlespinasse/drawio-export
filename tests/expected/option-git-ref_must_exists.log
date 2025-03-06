@@ -1,5 +1,5 @@
 Error: can't explore path .
 
 Caused by:
-    0: can't found reference unknown-ref on /data/.git/
-    1: revspec 'unknown-ref' not found; class=Reference (4); code=NotFound (-3)
+    0: need to be a git repository .
+    1: repository path '/data' is not owned by current user; class=Config (7); code=Owner (-36)
