@@ -37,10 +37,10 @@ Simple run with default options
   $ cd directory-with-drawio-files
   $ docker run -it -v $(pwd):/data rlespinasse/drawio-export
   + export file : ./file1.drawio
-  ++ export page 1 : Page-1
-  +++ generate pdf file
-  ++ export page 2 : Page 2
-  +++ generate pdf file
+  - export page 1 : Page-1
+  \ generate pdf file
+  - export page 2 : Page-2
+  \ generate pdf file
   ```
 
 Want to read more, go to [rlespinasse/drawio-export][1] on GitHub.

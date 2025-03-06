@@ -1,9 +1,9 @@
 + export file : shapes.drawio
-++ export page 1 : AWS
-+++ generate pdf file
-++ export page 2 : Azure
-+++ generate pdf file
-++ export page 3 : GCP
-+++ generate pdf file
-++ export page 4 : K8S
-+++ generate pdf file
+- export page 1 : AWS
+\ generate pdf file
+- export page 2 : Azure
+\ generate pdf file
+- export page 3 : GCP
+\ generate pdf file
+- export page 4 : K8S
+\ generate pdf file
