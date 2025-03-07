@@ -1,6 +1,6 @@
 + export file : name-collision.drawio
-++ export page 1 : Page-1
-+++ generate pdf file
+- export page 1 : Page-1
+\ generate pdf file
 + export file : name.drawio
-++ export page 1 : Page-1
-+++ generate pdf file
+- export page 1 : Page-1
+\ generate pdf file

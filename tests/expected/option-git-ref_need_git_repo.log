@@ -2,4 +2,4 @@ Error: can't explore path .
 
 Caused by:
     0: need to be a git repository .
-    1: could not find repository from '.'; class=Repository (6); code=NotFound (-3)
+    1: could not find repository at '.'; class=Repository (6); code=NotFound (-3)

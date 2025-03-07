@@ -1,7 +1,6 @@
-error: The following required arguments were not provided:
-    --on-changes
+error: the following required arguments were not provided:
+  --on-changes
 
-USAGE:
-    drawio-exporter --border <border> --quality <quality> --drawio-desktop-headless --output <folder> --format <format> --git-ref <reference> --on-changes
+Usage: drawio-exporter --on-changes --drawio-desktop-headless --git-ref <reference> [PATH]
 
-For more information try --help
+For more information, try '--help'.

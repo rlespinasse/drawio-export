@@ -24,8 +24,12 @@ test: cleanup build test-ci
 
 test-ci-setup:
 	@npm install bats
+	@sudo apt-get update
 	@sudo apt-get install -y libxml2-utils
 
 test-ci:
 	@mkdir -p tests/output
 	@DOCKER_IMAGE=$(DOCKER_IMAGE) npx bats --verbose-run -r tests
+
+autoupdate-drawio-exporter:
+	@sed -i "s/version.*/version $(cargo search drawio-exporter -q | sed "s/.*= \"//;s/\".*//")/" Dockerfile
