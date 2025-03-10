@@ -1,4 +1,6 @@
+---
 name: Update Docker Hub information
+
 on:
   release:
     types: [published]
@@ -8,11 +10,16 @@ on:
     paths:
       - DOCKER.md
       - .github/workflows/dockerhub.yaml
+
+permissions: read-all
+
 jobs:
   dockerHubDescription:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Sync information on Docker Hub
         uses: peter-evans/dockerhub-description@v4
         with:
