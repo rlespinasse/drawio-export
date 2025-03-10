@@ -1,5 +1,3 @@
-#checkov:skip=CKV_DOCKER_2
-#checkov:skip=CKV_DOCKER_3
 FROM rust:bullseye as drawio-exporter-installer
 
 RUN cargo install drawio-exporter --version 1.3.1
