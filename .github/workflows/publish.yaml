@@ -1,19 +1,28 @@
+---
 name: Publish to Registry
+
 on:
   release:
     types: [published, edited]
+
+permissions: read-all
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: rlespinasse/github-slug-action@v5
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
           platforms: "arm64,arm"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:

@@ -1,26 +1,33 @@
+---
 name: Autoupdate Drawio Exporter
+
 on:
   schedule:
     - cron: "0 0 * * 1" # Every Monday at midnight (UTC)
   workflow_dispatch:
+
 permissions:
   contents: write
   pull-requests: write
+
 concurrency:
   group: autoupdate-drawio-exporter
   cancel-in-progress: true
+
 jobs:
   autoupdate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - run: make autoupdate-drawio-exporter
         id: autoupdate-drawio-exporter
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         shell: bash
+
       - uses: peter-evans/create-pull-request@v7
         with:
-          title: "feat: update to drawio-exporter ${{ steps.autoupdate-drawio-desktop.outputs.release_version }}"
+          title: "feat: update to drawio-exporter ${{ steps.autoupdate-drawio-exporter.outputs.release_version }}"
           branch: autoupdate-drawio-exporter
           token: ${{ secrets.GH_TOKEN }}
