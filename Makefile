@@ -32,6 +32,6 @@ test-ci:
 	@DOCKER_IMAGE=$(DOCKER_IMAGE) npx bats --verbose-run -r tests
 
 autoupdate-drawio-exporter:
-	@$(eval DRAWIO_EXPORTER_RELEASE := $(shell gh release list --repo rlespinasse/drawio-exporter | grep "Latest" | cut -f1))
+	@$(eval DRAWIO_EXPORTER_RELEASE := $(shell gh release list --repo rlespinasse/drawio-exporter | grep "Latest" | cut -f1 | sed 's/^v//'))
 	@sed -i "s/version.*/version $(DRAWIO_EXPORTER_RELEASE)/" Dockerfile
 	@test -z "${GITHUB_OUTPUT}" || echo "release_version=$(DRAWIO_DESKTOP_RELEASE)" >> "${GITHUB_OUTPUT}"
