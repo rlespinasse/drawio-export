@@ -9,7 +9,7 @@ docker_test() {
 
   # shellcheck disable=SC2086,SC2046
   echo docker container run -t $docker_opts -w /data -v $(pwd)/${data_folder:-}:/data ${DOCKER_IMAGE} "$@" >>tests/output/$output_file-command.log
-  # shellcheck disable=SC2046
+  # shellcheck disable=SC2086,SC2046
   run docker container run -t $docker_opts -w /data -v $(pwd)/${data_folder:-}:/data ${DOCKER_IMAGE} "$@"
 
   # shellcheck disable=SC2154
