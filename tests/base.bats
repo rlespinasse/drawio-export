@@ -25,7 +25,7 @@ docker_test() {
   elif [ -f "tests/expected/uniq-$output_file.log" ]; then
     diff -u --strip-trailing-cr "tests/expected/uniq-$output_file.log" <(sort -u "tests/output/$output_file-comp.log") >"tests/output/$output_file-diff.log"
   fi
-  if [ -f "tests/output/$output_file-diff.log"]; then
+  if [ -f "tests/output/$output_file-diff.log" ]; then
     [ "$(cat "tests/output/$output_file-diff.log")" = "" ]
   fi
 }
