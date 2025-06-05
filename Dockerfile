@@ -4,7 +4,7 @@ FROM rust:bullseye as drawio-exporter-installer
 
 RUN cargo install drawio-exporter --version 1.3.2
 
-FROM rlespinasse/drawio-desktop-headless:v1.45.0
+FROM rlespinasse/drawio-desktop-headless:v1.46.0
 
 WORKDIR /opt/drawio-exporter
 COPY --from=drawio-exporter-installer /usr/local/cargo/bin/drawio-exporter .
