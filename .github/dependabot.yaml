@@ -1,23 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    directory: "/"
+  - package-ecosystem: 'docker'
+    directory: '/'
     commit-message:
-      prefix: "feat: "
+      prefix: 'feat: '
     schedule:
-      interval: "daily"
-    reviewers:
-      - "rlespinasse"
-    labels: [ ]
+      interval: 'daily'
+    labels: []
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     groups:
       dependencies:
         patterns:
-          - "*"
-    reviewers:
-      - "rlespinasse"
-    labels: [ ]
+          - '*'
+    labels: []
