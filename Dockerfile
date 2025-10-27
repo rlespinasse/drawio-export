@@ -1,10 +1,10 @@
 #checkov:skip=CKV_DOCKER_2
 #checkov:skip=CKV_DOCKER_3
-FROM rust:bullseye as drawio-exporter-installer
+FROM rust:trixie as drawio-exporter-installer
 
 RUN cargo install drawio-exporter --version 1.4.0
 
-FROM rlespinasse/drawio-desktop-headless:v1.48.0
+FROM rlespinasse/drawio-desktop-headless:v1.49.0
 
 WORKDIR /opt/drawio-exporter
 COPY --from=drawio-exporter-installer /usr/local/cargo/bin/drawio-exporter .
