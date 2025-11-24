@@ -19,7 +19,7 @@ jobs:
 
     steps:
       # Setup
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -68,7 +68,7 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: rlespinasse/github-slug-action@v5
 
@@ -103,7 +103,7 @@ jobs:
       group: release-${{ github.ref }}-${{ github.event_name }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Release this docker image
         uses: rlespinasse/release-that@v1
