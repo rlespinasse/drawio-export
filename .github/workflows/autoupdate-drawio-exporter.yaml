@@ -18,7 +18,7 @@ jobs:
   autoupdate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - run: make autoupdate-drawio-exporter
         id: autoupdate-drawio-exporter
