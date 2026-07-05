@@ -18,7 +18,7 @@ jobs:
   autoupdate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - run: make autoupdate-drawio-exporter
         id: autoupdate-drawio-exporter
@@ -26,7 +26,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         shell: bash
 
-      - uses: peter-evans/create-pull-request@v8
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           title: "feat: update to drawio-exporter ${{ steps.autoupdate-drawio-exporter.outputs.release_version }}"
           branch: autoupdate-drawio-exporter
