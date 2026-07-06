@@ -24,7 +24,7 @@ jobs:
         uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@4f0f7c9e4ac72db902c5142ffbbb4655d2d3dd3c # v5
+        uses: elgohr/Publish-Docker-Github-Action@1c2f28ccd9476e8a936ac9a1f287405504c93304 # v5
         with:
           name: ${{ github.repository }}
           username: ${{ secrets.DOCKER_USERNAME }}
