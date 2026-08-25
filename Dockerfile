@@ -2,7 +2,7 @@
 #checkov:skip=CKV_DOCKER_3
 FROM rust:trixie as drawio-exporter-installer
 
-RUN cargo install drawio-exporter --version 1.4.1
+RUN cargo install drawio-exporter --version 1.5.0
 
 FROM rlespinasse/drawio-desktop-headless:v1.62.0
 
