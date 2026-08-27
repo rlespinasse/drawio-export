@@ -56,9 +56,20 @@ test-ci:
 [group('Maintenance mode')]
 autoupdate-drawio-exporter:
   #!/usr/bin/env bash
+  set -euo pipefail
+  CURRENT_VERSION=$(sed -n 's/.*--version \([0-9.]*\).*/\1/p' Dockerfile | head -1)
   DRAWIO_EXPORTER_RELEASE=$(gh release list --repo rlespinasse/drawio-exporter | grep "Latest" | cut -f1 | sed 's/^v//')
   sed -i "s/version.*/version $DRAWIO_EXPORTER_RELEASE/" Dockerfile
   if [ -n "${GITHUB_OUTPUT}" ]; then
     echo "release_version=$DRAWIO_EXPORTER_RELEASE" >> "${GITHUB_OUTPUT}"
+
+    RELEASE_NOTES=$(gh release view "v$DRAWIO_EXPORTER_RELEASE" --repo rlespinasse/drawio-exporter --json body -q .body)
+    {
+      echo "release_notes<<GH_RELEASE_NOTES_EOF"
+      echo "Updates \`drawio-exporter\` from \`$CURRENT_VERSION\` to \`$DRAWIO_EXPORTER_RELEASE\`."
+      echo
+      echo "$RELEASE_NOTES"
+      echo "GH_RELEASE_NOTES_EOF"
+    } >> "${GITHUB_OUTPUT}"
   fi
   echo "Updated to drawio-exporter version $DRAWIO_EXPORTER_RELEASE"
