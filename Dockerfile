@@ -4,7 +4,7 @@ FROM rust:trixie as drawio-exporter-installer
 
 RUN cargo install drawio-exporter --version 1.5.0
 
-FROM rlespinasse/drawio-desktop-headless:v1.67.0
+FROM rlespinasse/drawio-desktop-headless:v1.69.1
 
 WORKDIR /opt/drawio-exporter
 COPY --from=drawio-exporter-installer /usr/local/cargo/bin/drawio-exporter .
